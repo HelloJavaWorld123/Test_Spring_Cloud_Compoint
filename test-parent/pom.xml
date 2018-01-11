@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.springboot.test</groupId>
+    <artifactId>test-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>test-parent</name>
+    <packaging>pom</packaging>
+    <description>测试项目的parent项目,集中管理通用的依赖</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-parent</artifactId>
+        <version>1.5.3.RELEASE</version>
+    </parent>
+
+    <!--定义 一些公共的版本信息-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <!--以及统一定义其他的版本号  容易管理-->
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!--该标签用于 定义不同环境下 将要激活或者使用的配置-->
+   <!-- <profiles>-->
+        <!--可配置多个 不同的环境 对应不同的文件-->
+       <!-- <profile>-->
+            <!--在使用mvn命令启动时 使用 -p dev 参数启动 响应的配置-->
+            <!--<id>dev</id>-->
+           <!-- <properties>
+                <profileActive>dev</profileActive>
+                <serviceBaseUrl>本项目访问的网址（IP：端口）</serviceBaseUrl>
+            </properties>-->
+            <!--<activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+        </profile>
+    </profiles>-->
+
+    <!--定义私服地址  发布版本到指定的私服仓库中，-->
+        <!--<repositories>
+            <repository>
+                <id>life-hosted-release</id>
+                <name>life-hosted-release</name>
+                <url>http://10.0.2.48:8081/nexus/content/repositories/life-hosted-release/</url>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                    <updatePolicy>always</updatePolicy>
+                </snapshots>
+            </repository>
+            <repository>
+                <id>life-hosted-snapshot</id>
+                <name>life-hosted-snapshot</name>
+                <url>http://10.0.2.48:8081/nexus/content/repositories/life-hosted-snapshot/</url>
+                <releases>
+                    <enabled>true</enabled>
+                </releases>
+                <snapshots>
+                    <enabled>true</enabled>
+                    <updatePolicy>always</updatePolicy>
+                </snapshots>
+            </repository>
+        </repositories>-->
+    <!--只是声明依赖的 版本号 子项目会使用该指定的版本号 但是不会引入依赖 引入依赖需要使用 denpendency-->
+
+
+    <!--<build>-->
+        <!--设置编译时 需要加载的资源-->
+        <!--<resources>
+            <resource>-->
+                <!--将 存在于文件里(非 resource 里的资源文件 )的 xml获取其他的资源文件 一起打包编译 -->
+               <!-- <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>-->
+                <!--可以指定过滤掉的文件-->
+                <!--<filtering>true</filtering>
+                <excludes>
+                    <exclude></exclude>
+                </excludes>-->
+            <!--</resource>
+        </resources>-->
+
+        <!--定义插件-->
+        <!--<plugins>-->
+            <!--maven 编译的插件-->
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>-->
+            <!--<plugin>  设置在 具体的项目中
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>create-release-zip</id>
+                        &lt;!&ndash;绑定到 Maven的 package 运行生命周期上 &ndash;&gt;
+                        <phase>package</phase>
+                        <goals>
+                            &lt;!&ndash;&ndash;&gt;
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            &lt;!&ndash;该打包插件需要一个 xml 文件与之配合使用   该标签就是用来描述所存放该xml文件的路径&ndash;&gt;
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+      <!--  </plugins>
+    </build>-->
+</project>
