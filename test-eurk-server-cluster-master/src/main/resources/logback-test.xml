@@ -29,21 +29,36 @@
 
         <!--日志文件的配置-->
         <appender name="${APPENDER_NAME_FILE}" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <File>${LOG_FILE_PATH}</File>
+            <!--<File>${LOG_FILE_PATH}</File>-->
             <!--日志文件 滚动策略-->
-            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
                 <!--日志文件 输出的文件名的格式 以及归档的分隔方式-->
-                <FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH}.log</FileNamePattern>
+                <!--<FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH HH:mm:ss}.%i.log</FileNamePattern>--> <!--有敏感符号 创建不成功-->
+                <FileNamePattern>D:\Log\Test_Cluster_Master_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <!--保留日志文件的天数-->
-                <MaxHistory>30</MaxHistory>
+                <MaxHistory>1</MaxHistory>
+                <maxFileSize>1MB</maxFileSize>
+                <totalSizeCap>2MB</totalSizeCap>
             </rollingPolicy>
+
             <encoder><!--class属性 可以省去-->
                 <pattern>${FILE_LOG_PATTERN}</pattern>
                 <charset>UTF-8</charset>
             </encoder>
-            <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-                <MaxFileSize>1MB</MaxFileSize>
-            </triggeringPolicy>
+
+            <!--以日期为基础 分隔日志文件 -->
+            <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                &lt;!&ndash;<FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH:mm:ss}.%i.log</FileNamePattern>&ndash;&gt;
+                <FileNamePattern>D:\Log\Test_Cluster_Slave_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <MaxHistory>1</MaxHistory>
+            </rollingPolicy>-->
+
+            <!--按照大小的方式 分隔日志文件-->
+            <!-- <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                 <maxFileSize>1MB</maxFileSize>
+             </triggeringPolicy>-->
+
+
         </appender>
     <!--</springProfile>-->
 
