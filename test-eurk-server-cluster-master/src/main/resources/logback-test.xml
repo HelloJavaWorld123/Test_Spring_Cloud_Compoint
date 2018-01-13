@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="true" scan="true" scanPeriod="30seconds">
 <!-- scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
  scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。
  debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。-->
-<configuration debug="true" scan="true" scanPeriod="30seconds">
 
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别 从左显示5个字符宽度  %msg：日志消息，%n是换行符-->
     <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
@@ -37,8 +37,8 @@
                 <FileNamePattern>D:\Log\Test_Cluster_Master_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <!--保留日志文件的天数-->
                 <MaxHistory>1</MaxHistory>
-                <maxFileSize>1MB</maxFileSize>
-                <totalSizeCap>2MB</totalSizeCap>
+                <maxFileSize>2MB</maxFileSize>
+                <totalSizeCap>10MB</totalSizeCap>
             </rollingPolicy>
 
             <encoder><!--class属性 可以省去-->

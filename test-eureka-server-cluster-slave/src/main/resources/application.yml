@@ -1,28 +1,25 @@
 server:
   port: 9999
-
-#定义节点 服务的名称 用于服务的调用
 spring:
   application:
     name: test-eureka-server-cluster-slave
-#定义server的相关信息
 eureka:
   instance:
-    ip-address: 127.0.0.1
+    #hostname: slave
+    ip-address: slave
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10       # 发送心跳的频率 单位秒 默认30秒  每隔10s发送一个心跳
     lease-expiration-duration-in-seconds: 30    # 发呆时间 自接收上一次心跳至下一次接收心跳信息的时间间隔
-    hostname: Cluster_Slave
-    instance-id: ${eureka.instance.hostname}:${eureka.instance.ip-address}:${server.port} #定义在页面上显示的名称
+    instance-id: ${eureka.instance.hostname}:${eureka.instance.ip-address}:${server.port}      #定义在页面上显示的当前应用服务的名称名称
   server:
     enable-self-preservation: true               #启动自我保护模式 用于网络分区异常时  节点被误移出
     eviction-interval-timer-in-ms: 60000         #间隔多长时间获取 注册服务信息
   client:
-    fetch-registry: true
-    register-with-eureka: true                    #允许客户端注册
+    fetch-registry: false
+    register-with-eureka: false                    #允许客户端注册
     registry-fetch-interval-seconds: 30
     service-url:
-        defaultZone: http://${security.user.name}:${security.user.password}@127.0.0.1:9888/eureka/
+        defaultZone: http://${security.user.name}:${security.user.password}@master:9888/eureka/,http://${security.user.name}:${security.user.password}@slave:9999/eureka/
 security:
   user:
     name: testService
