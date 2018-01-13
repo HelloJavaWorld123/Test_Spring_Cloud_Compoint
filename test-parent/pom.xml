@@ -7,7 +7,7 @@
     <groupId>com.springboot.test</groupId>
     <artifactId>test-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>test-parent</name>
+    <name>parent</name>
     <packaging>pom</packaging>
     <description>测试项目的parent项目,集中管理通用的依赖</description>
 

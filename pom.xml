@@ -6,14 +6,16 @@
 
     <groupId>com.springboot.test</groupId>
     <artifactId>wsd</artifactId>
+    <name>root</name>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <description>Maven聚合，统一管理所有Module的生命周期</description>
     <modules>
         <module>test-parent</module>
         <module>test-eurk-server-cluster-master</module>
         <module>test-eureka-server-cluster-slave</module>
-        <module>test-eurk-client</module>
-        <module>test-eurk-client-test</module>
+        <module>test-eureka-client</module>
+        <module>test-eureka-client-test</module>
         <module>test-kafka</module>
     </modules>
 

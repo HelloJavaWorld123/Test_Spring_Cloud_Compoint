@@ -1,0 +1,10 @@
+server:
+  port: 9777
+spring:
+  application:
+    name: test-eureka-client
+  datasource:
+    url: jdbc:mysql://127.0.0.1/test
+    data-username: root
+    data-password: root
+    driver-class-name: com.mysql.jdbc.Driver

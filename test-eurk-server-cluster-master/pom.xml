@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>test-eurk-server-cluster-master</artifactId>
-
+    <name>cluster-master</name>
     <!--配置不同环境下 通过-->
     <profiles>
         <profile>

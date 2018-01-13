@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test-eureka-server-cluster-slave</artifactId>
-
+    <name>cluster-slave</name>
 
     <properties>
         <eureka.server.version>1.3.4.RELEASE</eureka.server.version>
