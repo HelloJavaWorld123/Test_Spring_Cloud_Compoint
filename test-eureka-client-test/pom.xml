@@ -12,5 +12,14 @@
     <artifactId>test-eureka-client-test</artifactId>
     <name>client-test</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.5.8.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+
 
 </project>
