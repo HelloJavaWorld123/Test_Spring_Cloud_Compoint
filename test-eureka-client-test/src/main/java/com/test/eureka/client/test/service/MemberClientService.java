@@ -1,7 +1,7 @@
-package service;
+package com.test.eureka.client.test.service;
 
-import dto.Member;
-import org.springframework.stereotype.Service;
+import com.test.eureka.client.test.dto.Member;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,22 +17,23 @@ import java.util.List;
  * ======================
  */
 @RestController
+@RequestMapping("/api/user")
 public interface MemberClientService
 {
 	 static final  String BASE_URL = "/rpc/user";
 
 	@RequestMapping("/info")
-	 Member getById(String id);
+	Member getById(String id);
 
 	@RequestMapping("/list")
 	List<Member> list();
 
 	@RequestMapping("/add")
-	void addMem(Member member);
+	void addMem(@RequestBody Member member);
 
 	@RequestMapping("/del")
 	void deleteMem(String id);
 
 	@RequestMapping("/update")
-	void updateMem(Member member);
+	void updateMem(@RequestBody Member member);
 }

@@ -1,4 +1,4 @@
-package dto;
+package com.test.eureka.client.test.dto;
 
 /**
  * ======================

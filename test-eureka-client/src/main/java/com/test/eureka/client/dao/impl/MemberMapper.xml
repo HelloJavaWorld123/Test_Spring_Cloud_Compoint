@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.eureka.client.dao.MemberMapper">
+    <select id="selectById" resultType="com.test.eureka.client.test.dto.Member">
+      SELECT *
+      FROM user u
+      where id = #{id}
+    </select>
+
+    <select id="selectAll" resultType="com.test.eureka.client.test.dto.Member">
+      SELECT * FROM user
+    </select>
+
+    <update id="update" parameterType="com.test.eureka.client.test.dto.Member">
+        UPDATE user
+        <set>
+            <if test="member.name != null and member.name != ''">
+                name = #{member.name},
+            </if>
+            <if test="member.age != null and member.age != ''">
+                age = #{member.age},
+            </if>
+            <if test="member.sex != null and member.sex != ''">
+                sex = #{member.sex},
+            </if>
+            <if test="member.address != null and member.address != ''">
+                address = #{member.address},
+            </if>
+        </set>
+        <where>
+            <if test="member.name != null and member.name != ''">
+                AND name = #{member.name}
+            </if>
+            <if test="member.age != null and member.age != ''">
+                AND age = #{member.age}
+            </if>
+            <if test="member.sex != null and member.sex != ''">
+               AND sex = #{member.sex}
+            </if>
+            <if test="member.address != null and member.address != ''">
+                AND address = #{member.address}
+            </if>
+        </where>
+    </update>
+    
+    <insert id="addMember" parameterType="com.test.eureka.client.test.dto.Member">
+        <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
+            SELECT REPLACE(UUID(),'-','')
+        </selectKey>
+        INSERT INTO user (id,name,age,sex,address)
+        VALUES (#{id},#{member.name},#{member.age},#{member.sex},#{member.address})
+    </insert>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+      DELETE FROM user where id = #{id}
+    </delete>
+</mapper>

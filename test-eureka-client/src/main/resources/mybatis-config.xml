@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--是否开启mybatis缓存开关  默认值为true-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--延迟加载的全局开关 默认值为 false，当开启时 所有关联的对象 都会延迟加载，当需要对特定的对象额外设置时 使用 fetchType 属性 覆盖该全局设置-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--当开启时 所有的方法的调用都会加载该对象的所有的属性
+             当关闭时，会按需加载属性；默认值为false；-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--是否允许单一语句返回多结果集 默认值为true-->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!--配置默认的执行器 SIMPLE 默认的 简单的执行器；REUSE 执行器重用预处理语句（prepare statement ）；BATCH 执行器将重用语句并执行批量更新-->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!--是指驱动等待 数据库  响应的时间  任意正整数  不设置为null  单位秒-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <!--开启驼峰命名规则-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--指定Mybatis 增加到日志的前缀-->
+        <setting name="logPrefix" value="*****MyBatis_"/>
+        <!--指定MyBatis日志的具体实现方式 未指定将自动查找  -->
+    </settings>
+</configuration>

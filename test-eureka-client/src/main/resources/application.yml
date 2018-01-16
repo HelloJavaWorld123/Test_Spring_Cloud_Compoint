@@ -4,10 +4,10 @@ spring:
   application:
     name: test-eureka-client
   datasource:
-    url: jdbc:mysql://127.0.0.1/test
-    data-username: root
-    data-password: root
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/rxk?serverTimezone=UTC&characterEncoding=UTF-8
+    username: helloworld
+    password: 1234567890
+    driver-class-name: com.mysql.cj.jdbc.Driver
     filters: stat
     maxActive: 20
     initialSize: 1
@@ -21,3 +21,7 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+mybatis:
+  mapper-locations: classpath*:com/test/eureka/client/**/dao/**/*Mapper.xml  # 不能有空格
+  config-location: classpath:mybatis-config.xml
+

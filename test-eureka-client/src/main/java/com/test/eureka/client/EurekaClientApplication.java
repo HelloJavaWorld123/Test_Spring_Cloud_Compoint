@@ -1,7 +1,10 @@
 package com.test.eureka.client;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 
 /**
  * ======================
@@ -12,6 +15,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * Description:
  * ======================
  */
+@MapperScan(annotationClass = Repository.class,basePackages = {"com.test.eureka.client"})
+@ComponentScan(basePackages = {"com.test.eureka"})
 @SpringBootApplication
 public class EurekaClientApplication
 {

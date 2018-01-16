@@ -56,12 +56,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
     </dependencies>
 
     <!--该标签用于 定义不同环境下 将要激活或者使用的配置-->
