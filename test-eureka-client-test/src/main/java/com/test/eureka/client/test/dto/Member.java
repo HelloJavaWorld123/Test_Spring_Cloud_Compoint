@@ -1,5 +1,11 @@
 package com.test.eureka.client.test.dto;
 
+import com.test.eureka.client.test.enums.DeleteFlageEnum;
+import com.test.eureka.client.test.enums.SexEnum;
+
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * ======================
  * Created By Member: RXK
@@ -9,16 +15,33 @@ package com.test.eureka.client.test.dto;
  * Description:
  * ======================
  */
-public class Member
+public class Member implements Serializable
 {
+	private String id ;
 	private String name ;
+
+	private SexEnum sexEnum ;
 
 	private Integer age ;
 
 	private String address ;
 
-	private Integer sex ;
+	private Date updateTime ;
+	private Date createTime ;
+	private String createBy;
+	private String updateBy;
+	private DeleteFlageEnum deleteFlag ;
 
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
 	public String getName()
 	{
@@ -28,6 +51,16 @@ public class Member
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public SexEnum getSexEnum()
+	{
+		return sexEnum;
+	}
+
+	public void setSexEnum(SexEnum sexEnum)
+	{
+		this.sexEnum = sexEnum;
 	}
 
 	public Integer getAge()
@@ -50,13 +83,53 @@ public class Member
 		this.address = address;
 	}
 
-	public Integer getSex()
+	public Date getUpdateTime()
 	{
-		return sex;
+		return updateTime;
 	}
 
-	public void setSex(Integer sex)
+	public void setUpdateTime(Date updateTime)
 	{
-		this.sex = sex;
+		this.updateTime = updateTime;
+	}
+
+	public Date getCreateTime()
+	{
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime)
+	{
+		this.createTime = createTime;
+	}
+
+	public String getCreateBy()
+	{
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy)
+	{
+		this.createBy = createBy;
+	}
+
+	public String getUpdateBy()
+	{
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy)
+	{
+		this.updateBy = updateBy;
+	}
+
+	public DeleteFlageEnum getDeleteFlag()
+	{
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(DeleteFlageEnum deleteFlag)
+	{
+		this.deleteFlag = deleteFlag;
 	}
 }

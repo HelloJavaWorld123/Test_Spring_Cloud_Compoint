@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.test.eureka.client.dao.MemberMapper">
-    <select id="selectById" resultType="com.test.eureka.client.test.dto.Member">
+    
+    <resultMap id="member" type="com.test.eureka.client.test.dto.Member">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="sexEnum" column="sex" typeHandler="com.test.eureka.client.test.util.AutoEnumChange"/>
+        <result property="deleteFlag" column="delete_flag" typeHandler="com.test.eureka.client.test.util.AutoEnumChange"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_Time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createBy" column="create_by"/>
+    </resultMap>
+    
+    
+    <select id="selectById" parameterType="java.lang.String" resultMap="member">
       SELECT *
       FROM user u
       where id = #{id}
     </select>
 
-    <select id="selectAll" resultType="com.test.eureka.client.test.dto.Member">
-      SELECT * FROM user
+    <select id="selectAll"  resultMap="member">
+      SELECT
+        id,name
+        ,age
+        ,sex
+        ,address
+        ,create_time AS createTime
+        ,update_time AS updateTime
+        ,create_by AS  createBy
+        ,update_by AS updateBy
+        ,delete_flag AS deleteFlag
+      FROM user
     </select>
 
     <update id="update" parameterType="com.test.eureka.client.test.dto.Member">
@@ -28,17 +52,8 @@
             </if>
         </set>
         <where>
-            <if test="member.name != null and member.name != ''">
-                AND name = #{member.name}
-            </if>
-            <if test="member.age != null and member.age != ''">
-                AND age = #{member.age}
-            </if>
-            <if test="member.sex != null and member.sex != ''">
-               AND sex = #{member.sex}
-            </if>
-            <if test="member.address != null and member.address != ''">
-                AND address = #{member.address}
+            <if test="member.id != null and member.id != ''">
+                id = #{member.id}
             </if>
         </where>
     </update>
@@ -52,6 +67,6 @@
     </insert>
 
     <delete id="deleteById" parameterType="java.lang.String">
-      DELETE FROM user where id = #{id}
+      UPDATE user SET delete_falge = 1
     </delete>
 </mapper>

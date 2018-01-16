@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * ======================
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Repository;
 @MapperScan(annotationClass = Repository.class,basePackages = {"com.test.eureka.client"})
 @ComponentScan(basePackages = {"com.test.eureka"})
 @SpringBootApplication
+@EnableTransactionManagement
 public class EurekaClientApplication
 {
 	public static void main(String[]args){

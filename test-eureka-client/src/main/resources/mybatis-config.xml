@@ -24,4 +24,5 @@
         <setting name="logPrefix" value="*****MyBatis_"/>
         <!--指定MyBatis日志的具体实现方式 未指定将自动查找  -->
     </settings>
+
 </configuration>

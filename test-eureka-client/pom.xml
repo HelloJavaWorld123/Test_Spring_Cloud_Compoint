@@ -45,12 +45,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ruijc</groupId>
-            <artifactId>spring-boot-starter-mybatis</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
