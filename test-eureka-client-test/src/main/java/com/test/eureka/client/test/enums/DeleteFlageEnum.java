@@ -2,7 +2,6 @@ package com.test.eureka.client.test.enums;
 
 
 import com.test.eureka.client.test.util.BaseEnum;
-import org.aspectj.apache.bcel.classfile.Code;
 
 import java.util.HashMap;
 import java.util.Map;

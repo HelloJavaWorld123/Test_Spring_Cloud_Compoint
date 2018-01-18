@@ -1,6 +1,7 @@
-package com.test.eureka.client.dao;
+package com.test.eureka.web.client.dao;
 
 import com.test.eureka.client.test.dto.Member;
+import com.test.eureka.client.test.dto.MemberInDTO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +23,9 @@ public interface MemberMapper
 
 	List<Member> selectAll();
 
-	void addMember(@Param("member") Member member);
+	int addMember(@Param("member") MemberInDTO member);
 
-	void deleteById(String id);
+	int deleteById(String id);
 
-	void update(@Param("member") Member member);
+	int update(@Param("member") MemberInDTO member);
 }

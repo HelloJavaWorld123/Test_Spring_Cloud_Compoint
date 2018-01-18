@@ -7,7 +7,7 @@ spring:
 eureka:
   instance:
     #hostname: server
-    ip-address: master                                    # 当下面的为true时  才能使用当前的ip
+    ip-address: 127.0.0.1                                    # 当下面的为true时  才能使用当前的ip
     prefer-ip-address: true                                # 在页面上不使用默认的形式展现名称 而使用 ip：端口口的形式 显示 名称
     lease-renewal-interval-in-seconds: 10                 # 多长时间获取一次心跳
     lease-expiration-duration-in-seconds: 30              # 发呆时间 从上一次获取到心跳到下一次获取心跳的间隔时间
@@ -20,7 +20,7 @@ eureka:
     register-with-eureka: false                              # 同理 不能注册到自己上面  当启用服务注册中心时  需要改为true
     registry-fetch-interval-seconds: 30
     service-url:
-      defaultZone: http://${security.user.name}:${security.user.password}@slave:9999/eureka/,http://${security.user.name}:${security.user.password}@master:9999/eureka/  # 如果使用高可用时  可以使用多个IP 同一个端口号 用逗号隔开  开启上面的 注册
+      defaultZone: http://${security.user.name}:${security.user.password}@127.0.0.1:9999/eureka/,http://${security.user.name}:${security.user.password}@127.0.0.1:9888/eureka/  # 如果使用高可用时  可以使用多个IP 同一个端口号 用逗号隔开  开启上面的 注册
 security:
   user:
     name: testService

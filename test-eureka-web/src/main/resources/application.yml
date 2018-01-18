@@ -1,0 +1,28 @@
+server:
+  port: 9666
+spring:
+  application:
+     name: Web-Client-Service
+eureka:
+  instance:
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10 #获取心跳的时间
+    lease-expiration-duration-in-seconds: 30   #间隔时间
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30    #获取注册中心的服务注册信息 默认为30秒
+    service-url:
+        defaultZone: http://testService:123aaa@127.0.0.1:9999/eureka/,http://testService:123aaa@127.0.0.1:9888/eureka/
+endpoints:
+  enabled: true
+  refresh:
+    enabled: true
+feign:
+  compression:
+    request:
+      min-request-size: 1024
+      mime-types: text/xml,application/json,application/xml
+

@@ -1,6 +1,7 @@
 package com.test.eureka.client.test.service;
 
 import com.test.eureka.client.test.dto.Member;
+import com.test.eureka.client.test.dto.MemberInDTO;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +30,11 @@ public interface MemberClientService
 	List<Member> list();
 
 	@RequestMapping("/add")
-	void addMem(@RequestBody Member member);
+	int addMem(@RequestBody MemberInDTO member);
 
 	@RequestMapping("/del")
-	void deleteMem(String id);
+	int deleteMem(String id);
 
 	@RequestMapping("/update")
-	void updateMem(@RequestBody Member member);
+	int updateMem(@RequestBody MemberInDTO member);
 }

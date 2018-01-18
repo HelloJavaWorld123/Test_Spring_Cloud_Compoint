@@ -6,7 +6,7 @@ spring:
 eureka:
   instance:
     #hostname: slave
-    ip-address: slave
+    ip-address: 127.0.0.1
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10       # 发送心跳的频率 单位秒 默认30秒  每隔10s发送一个心跳
     lease-expiration-duration-in-seconds: 30    # 发呆时间 自接收上一次心跳至下一次接收心跳信息的时间间隔
@@ -19,7 +19,7 @@ eureka:
     register-with-eureka: false                    #允许客户端注册
     registry-fetch-interval-seconds: 30
     service-url:
-        defaultZone: http://${security.user.name}:${security.user.password}@master:9888/eureka/,http://${security.user.name}:${security.user.password}@slave:9999/eureka/
+        defaultZone: http://${security.user.name}:${security.user.password}@127.0.0.1:9888/eureka/,http://${security.user.name}:${security.user.password}@127.0.0.1:9999/eureka/
 security:
   user:
     name: testService

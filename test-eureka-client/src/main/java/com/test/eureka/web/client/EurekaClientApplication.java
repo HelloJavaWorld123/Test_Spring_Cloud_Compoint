@@ -1,4 +1,4 @@
-package com.test.eureka.client;
+package com.test.eureka.web.client;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

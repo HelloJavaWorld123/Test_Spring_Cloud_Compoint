@@ -9,26 +9,33 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test-eureka-client-test</artifactId>
-    <name>client-test</name>
+    <artifactId>test-eureka-web</artifactId>
+    <name>web</name>
+    <description>客户端,服务提供方</description>
 
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>1.5.8.RELEASE</version>
         </dependency>
 
         <dependency>
-            <groupId>com.ruijc</groupId>
-            <artifactId>spring-boot-starter-mybatis</artifactId>
-            <version>3.2.2</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>1.3.4.RELEASE</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-            <version>1.5.6.RELEASE</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
+            <version>1.3.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.springboot.test</groupId>
+            <artifactId>test-eureka-client-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -37,7 +44,15 @@
             <version>2.6.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+
     </dependencies>
 
+
+    
 
 </project>

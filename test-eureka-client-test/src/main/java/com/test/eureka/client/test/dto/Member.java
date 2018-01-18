@@ -2,6 +2,8 @@ package com.test.eureka.client.test.dto;
 
 import com.test.eureka.client.test.enums.DeleteFlageEnum;
 import com.test.eureka.client.test.enums.SexEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,15 +17,22 @@ import java.util.Date;
  * Description:
  * ======================
  */
+@ApiModel
 public class Member implements Serializable
 {
+	@ApiModelProperty(value = "用户Id",name = "id")
 	private String id ;
+
+	@ApiModelProperty(name = "name",value = "用户名称")
 	private String name ;
 
+	@ApiModelProperty(name = "用户性别",value = "sexEnum")
 	private SexEnum sexEnum ;
 
+	@ApiModelProperty(value="age",name = "用户年龄")
 	private Integer age ;
 
+	@ApiModelProperty(value = "address",name = "用户地址")
 	private String address ;
 
 	private Date updateTime ;
