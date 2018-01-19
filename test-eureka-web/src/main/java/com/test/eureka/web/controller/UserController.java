@@ -31,14 +31,14 @@ import java.util.Objects;
  */
 @Api(value = "UserController", description = "测试用户接口")
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/menage/user")
 public class UserController
 {
 	@Autowired
 	private MemberFeignService memberFeignService;
 
 	@ApiOperation(value = "查找用户详情", response = com.test.eureka.client.test.dto.Member.class)
-	@RequestMapping("/id")
+	@PostMapping("/id")
 	public ResponseEntity getUser(@RequestBody MemberInDTO dto)
 	{
 		if (StringUtils.isEmpty(dto.getId()))

@@ -3,7 +3,8 @@ package com.test.eureka.web.config;
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
@@ -17,6 +18,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.lang.management.BufferPoolMXBean;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,45 +35,36 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2Config
 {
-
-	static List<Parameter> list = new ArrayList<>();
-
-	//初始化所有接口的 必须传入的所有的参数；
-	static
-	{
-		ParameterBuilder parameterBuilder = new ParameterBuilder();
-
-		parameterBuilder.defaultValue("token")
-				.description("令牌")
-				.modelRef(new ModelRef("String"))
-				.parameterType("String")
-				.required(false)
-				.build();
-
-		Parameter build = parameterBuilder.build();
-		list.add(build);
-	}
-
-
 	@Bean
 	public Docket webDocket()
 	{
+		List<Parameter> parameters = new ArrayList<>();
+		ParameterBuilder builder = new ParameterBuilder();
+		builder.defaultValue("token")  //输入框中显示的值，类似于占位符；
+				.description("令牌")   //参数描述
+				.modelRef(new ModelRef("String")) //对应参数数据类型
+				.parameterType("header")  // header, cookie, body, query
+				.name("access-token") //参数入参名称
+				.required(false)   //是否必传
+				.build();
+		Parameter parameter = builder.build();
+		parameters.add(parameter);
 		return new Docket(DocumentationType.SWAGGER_2).enable(true)
-				.groupName("web_service_api")  //显示在小方框中的名称
-				.genericModelSubstitutes(DeferredResult.class)
+				.groupName("web_api")  //组名称
+				.genericModelSubstitutes(ResponseEntity.class)
 				.useDefaultResponseMessages(false)
 				.forCodeGeneration(true)
 				.pathMapping("/")
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.test.eureka.web")) //过滤包
-				.paths(Predicates.or(PathSelectors.regex("/api/user/.*"))) //过滤接口
+				.apis(Predicates.or(RequestHandlerSelectors.basePackage("com.test.eureka.web.controller"))) //扫描的包
+				.paths(PathSelectors.regex("/api/menage/user.*"))  //过滤的接口
 				.build()
-				.globalOperationParameters(list)  //为所有的接口 统一添加需要传入的参数 比如 token 之类的参数 必须传入的
-				.apiInfo(webApiInfo());
+				.globalOperationParameters(parameters) //公共参数
+				.apiInfo(webApiInfo());  //所使用的文档基础信息
 	}
 
 
-	public ApiInfo webApiInfo()
+	private ApiInfo webApiInfo()
 	{
 		Contact contact = new Contact("RXK", "localhost:9666", "http://127.0.0.1:9999");
 
@@ -83,6 +76,4 @@ public class Swagger2Config
 				.version("V1.0")
 				.build();
 	}
-
-
 }

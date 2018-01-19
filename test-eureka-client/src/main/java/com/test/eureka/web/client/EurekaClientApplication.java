@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Description:
  * ======================
  */
-@MapperScan(annotationClass = Repository.class,basePackages = {"com.test.eureka.client"})
+@MapperScan(annotationClass = Repository.class,basePackages = {"com.test.eureka.web.client.dao"})
 @ComponentScan(basePackages = {"com.test.eureka"})
 @SpringBootApplication
 @EnableTransactionManagement
