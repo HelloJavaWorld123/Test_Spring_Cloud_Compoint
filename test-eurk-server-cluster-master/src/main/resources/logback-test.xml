@@ -7,7 +7,7 @@
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别 从左显示5个字符宽度  %msg：日志消息，%n是换行符-->
     <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSSS} - [thread:%thread] - [level:%-5level] - [%class : %method : %line] - %msg %n"/>
+              value="%d{yy-MM-dd HH:mm:ss}-[%thread]-[%class:%method]- %msg %n"/>
     <property name="FILE_LOG_PATTERN"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} - [thread:%thread] - [level:%-5level] - [%class : %method : %line] - %msg %n"/>
     <!--路径不能使用相对路径  路劲上的分隔符 windows 上和linux上不一样 -->

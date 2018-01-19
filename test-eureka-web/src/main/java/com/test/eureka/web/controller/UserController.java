@@ -64,7 +64,14 @@ public class UserController
 					.body("缺少必要的参数");
 		}
 
-		int i = memberFeignService.addMem(dto);
+		int i = 0;
+		try
+		{
+			i = memberFeignService.addMem(dto);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		if (i != 1)
 		{
@@ -86,7 +93,14 @@ public class UserController
 					.body("缺少必要的参数");
 		}
 
-		int i = memberFeignService.updateMem(dto);
+		int i = 0;
+		try
+		{
+			i = memberFeignService.updateMem(dto);
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		if (i != 1)
 		{

@@ -20,6 +20,10 @@ endpoints:
   enabled: true
   refresh:
     enabled: true
+  health:
+    enabled: true
+  actuator:
+    enabled: true
 feign:
   compression:
     request:

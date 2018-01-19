@@ -2,9 +2,8 @@ package com.test.eureka.client.test.service;
 
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,24 +16,22 @@ import java.util.List;
  * Description: client 段对外开放的调用接口
  * ======================
  */
-@RestController
-@RequestMapping("/api/user")
 public interface MemberClientService
 {
-	 static final  String BASE_URL = "/rpc/user";
+	 static final  String BASE_URL = "/api/user";
 
-	@RequestMapping("/info")
+	@RequestMapping(value = BASE_URL+"/info",method = RequestMethod.POST)
 	Member getById(String id);
 
-	@RequestMapping("/list")
+	@RequestMapping(value = BASE_URL+"/list",method = RequestMethod.POST)
 	List<Member> list();
 
-	@RequestMapping("/add")
+	@RequestMapping(value = BASE_URL+"/add",method = RequestMethod.POST)
 	int addMem(@RequestBody MemberInDTO member);
 
-	@RequestMapping("/del")
+	@RequestMapping(value = BASE_URL+"/del",method = RequestMethod.POST)
 	int deleteMem(String id);
 
-	@RequestMapping("/update")
+	@RequestMapping(value = BASE_URL+"/update",method = RequestMethod.POST)
 	int updateMem(@RequestBody MemberInDTO member);
 }

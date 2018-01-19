@@ -3,6 +3,8 @@ package com.test.eureka.web.client;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.test.eureka"})
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableFeignClients
+@EnableDiscoveryClient
 public class EurekaClientApplication
 {
 	public static void main(String[]args){

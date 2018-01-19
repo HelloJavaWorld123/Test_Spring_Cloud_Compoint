@@ -19,7 +19,7 @@ public enum SexEnum
 		implements BaseEnum<SexEnum, Integer>
 {
 	FALMEL(1, "男"),
-	MEMAL(2, "女");
+	MEMAL(0, "女");
 
 	private Integer code;
 

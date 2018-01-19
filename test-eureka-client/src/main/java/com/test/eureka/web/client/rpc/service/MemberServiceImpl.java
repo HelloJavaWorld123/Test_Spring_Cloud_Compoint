@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,8 +23,7 @@ import java.util.List;
  * Description：client端 暴露 服务  此端 提供基础的服务实现
  * ======================
  */
-@Service
-@Transactional
+@RestController
 public class MemberServiceImpl implements MemberClientService
 {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);
