@@ -34,94 +34,84 @@ import java.util.Objects;
 @RequestMapping("/api/menage/user")
 public class UserController
 {
-	@Autowired
-	private MemberFeignService memberFeignService;
+    @Autowired
+    private MemberFeignService memberFeignService;
 
-	@ApiOperation(value = "查找用户详情", response = com.test.eureka.client.test.dto.Member.class)
-	@PostMapping("/id")
-	public ResponseEntity getUser(@RequestBody MemberInDTO dto)
-	{
-		if (StringUtils.isEmpty(dto.getId()))
-		{
-			return ResponseEntity.badRequest()
-					.body("缺少参数");
-		} Member member = memberFeignService.getById(dto.getId());
+    @ApiOperation(value = "查找用户详情", response = com.test.eureka.client.test.dto.Member.class)
+    @PostMapping("/id")
+    public ResponseEntity getUser(@RequestBody MemberInDTO dto)
+    {
+        if (StringUtils.isEmpty(dto.getId()))
+        {
+            return ResponseEntity.badRequest()
+                    .body("缺少参数");
+        }
+        Member member = memberFeignService.getById(dto.getId());
 
-		if (Objects.isNull(member))
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("参数错误");
-		} return ResponseEntity.ok(member);
-	}
+        if (Objects.isNull(member))
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("参数错误");
+        }
+        return ResponseEntity.ok(member);
+    }
 
-	@ApiOperation(value = "新增用户", httpMethod = "POST")
-	@PostMapping("/add")
-	public ResponseEntity add(@RequestBody MemberInDTO dto)
-	{
-		if (StringUtils.isEmpty(dto.getName()) || StringUtils.isEmpty(dto.getAddress()) || Objects.isNull(dto.getAge()) || Objects.isNull(dto.getSex()))
-		{
-			return ResponseEntity.badRequest()
-					.body("缺少必要的参数");
-		}
+    @ApiOperation(value = "新增用户", httpMethod = "POST")
+    @PostMapping("/add")
+    public ResponseEntity add(@RequestBody MemberInDTO dto)
+    {
+        if (StringUtils.isEmpty(dto.getName()) || StringUtils.isEmpty(dto.getAddress()) || Objects.isNull(dto.getAge()) || Objects.isNull(dto.getSex()))
+        {
+            return ResponseEntity.badRequest()
+                    .body("缺少必要的参数");
+        }
 
-		int i = 0;
-		try
-		{
-			i = memberFeignService.addMem(dto);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+        int i = 0;
+        try
+        {
+            return memberFeignService.addMem(dto);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.METHOD_FAILURE)
+                    .body("新增失败");
+        }
 
-		if (i != 1)
-		{
-			return ResponseEntity.status(HttpStatus.METHOD_FAILURE)
-					.body("新增失败");
-		}
-
-		return ResponseEntity.ok("新增成功");
-	}
+    }
 
 
-	@ApiOperation(value = "更新用户信息")
-	@PostMapping("/update")
-	public ResponseEntity update(@RequestBody MemberInDTO dto)
-	{
-		if (StringUtils.isEmpty(dto.getId()) || StringUtils.isEmpty(dto.getName()) || StringUtils.isEmpty(dto.getAddress()) || Objects.isNull(dto.getAge()) || Objects.isNull(dto.getSex()))
-		{
-			return ResponseEntity.badRequest()
-					.body("缺少必要的参数");
-		}
+    @ApiOperation(value = "更新用户信息")
+    @PostMapping("/update")
+    public ResponseEntity update(@RequestBody MemberInDTO dto)
+    {
+        if (StringUtils.isEmpty(dto.getId()) || StringUtils.isEmpty(dto.getName()) || StringUtils.isEmpty(dto.getAddress()) || Objects.isNull(dto.getAge()) || Objects.isNull(dto.getSex()))
+        {
+            return ResponseEntity.badRequest()
+                    .body("缺少必要的参数");
+        }
 
-		int i = 0;
-		try
-		{
-			i = memberFeignService.updateMem(dto);
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+        try
+        {
+            return memberFeignService.updateMem(dto);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.METHOD_FAILURE)
+                    .body("更新失败");
+        }
+    }
 
-		if (i != 1)
-		{
-			return ResponseEntity.status(HttpStatus.METHOD_FAILURE)
-					.body("更新失败");
-		}
+    @ApiOperation(value = "获取用户信息")
+    @PostMapping("/list")
+    public ResponseEntity list()
+    {
+        List<Member> list = memberFeignService.list();
 
-		return ResponseEntity.ok("更新成功");
-	}
-
-	@ApiOperation(value = "获取用户信息")
-	@PostMapping("/list")
-	public ResponseEntity list()
-	{
-		List<Member> list = memberFeignService.list();
-
-		if (CollectionUtils.isEmpty(list))
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND)
-					.body("暂无数据");
-		}
-		return ResponseEntity.ok(list);
-	}
+        if (CollectionUtils.isEmpty(list))
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("暂无数据");
+        }
+        return ResponseEntity.ok(list);
+    }
 }

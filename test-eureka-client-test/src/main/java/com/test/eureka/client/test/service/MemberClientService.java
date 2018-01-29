@@ -3,6 +3,7 @@ package com.test.eureka.client.test.service;
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +28,11 @@ public interface MemberClientService
 	List<Member> list();
 
 	@RequestMapping(value = BASE_URL+"/add",method = RequestMethod.POST)
-	int addMem(@RequestBody MemberInDTO member);
+	ResponseEntity addMem(@RequestBody MemberInDTO member);
 
 	@RequestMapping(value = BASE_URL+"/del",method = RequestMethod.POST)
-	int deleteMem(String id);
+	ResponseEntity deleteMem(String id);
 
 	@RequestMapping(value = BASE_URL+"/update",method = RequestMethod.POST)
-	int updateMem(@RequestBody MemberInDTO member);
+	ResponseEntity updateMem(@RequestBody MemberInDTO member);
 }

@@ -1,18 +1,24 @@
 package com.test.eureka.web.client.rpc.service;
 
 import com.test.eureka.client.test.dto.MemberInDTO;
+import com.test.eureka.client.test.enums.DeleteFlageEnum;
+import com.test.eureka.client.test.enums.SexEnum;
 import com.test.eureka.web.client.dao.MemberMapper;
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.service.MemberClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ======================
@@ -24,45 +30,71 @@ import java.util.List;
  * ======================
  */
 @RestController
-public class MemberServiceImpl implements MemberClientService
+public class MemberServiceImpl
+        implements MemberClientService
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemberServiceImpl.class);
 
-	@Autowired
-	private MemberMapper memberMapper ;
+    @Autowired
+    private MemberMapper memberMapper;
 
-	@Override
-	public Member getById(String id)
-	{
-		LOGGER.info("********************查询单个用户的信息*************************");
-		return memberMapper.selectById(id);
-	}
+    @Override
+    public Member getById(String id)
+    {
+        LOGGER.info("********************查询单个用户的信息*************************");
+        return memberMapper.selectById(id);
+    }
 
-	@Override
-	public List<Member> list()
-	{
-		LOGGER.info("********************查询所有用户的信息*************************");
-		return memberMapper.selectAll();
-	}
+    @Override
+    public List<Member> list()
+    {
+        LOGGER.info("********************查询所有用户的信息*************************");
+        return memberMapper.selectAll();
+    }
 
-	@Override
-	public int addMem(@RequestBody MemberInDTO member)
-	{
-		LOGGER.info("********************新增单个用户的信息*************************");
-		return memberMapper.addMember(member);
-	}
+    @Override
+    public ResponseEntity addMem(@RequestBody MemberInDTO member)
+    {
+        LOGGER.info("********************新增单个用户的信息*************************");
+        Member user = new Member();
+        user.setAddress(member.getAddress());
+        user.setAge(member.getAge());
+        user.setName(member.getName());
+        user.setSexEnum(SexEnum.getCode(member.getSex()));
+        user.setDeleteFlag(DeleteFlageEnum.DELETE_NO);
+        user.setCreateTime(new Date());
+        user.setUpdateTime(new Date());
+        int i = memberMapper.addMember(user);
+        if (i != 1)
+        {
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("新增失败");
+        }
+        return ResponseEntity.ok("新增成功");
+    }
 
-	@Override
-	public int deleteMem(String id)
-	{
-		LOGGER.info("********************删除单个用户的信息*************************");
-		return memberMapper.deleteById(id);
-	}
+    @Override
+    public ResponseEntity deleteMem(String id)
+    {
+        LOGGER.info("********************删除单个用户的信息*************************");
+        memberMapper.deleteById(id);
+        return ResponseEntity.ok("删除成功");
+    }
 
-	@Override
-	public int updateMem(@RequestBody MemberInDTO member)
-	{
-		LOGGER.info("********************更新单个用户的信息*************************");
-		return memberMapper.update(member);
-	}
+    @Override
+    public ResponseEntity updateMem(@RequestBody MemberInDTO member)
+    {
+        LOGGER.info("********************更新单个用户的信息*************************");
+
+        Member user = memberMapper.selectById(member.getId());
+        if (Objects.isNull(user))
+        {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("参数错误");
+        }
+        int i = memberMapper.update(member);
+        if (i != 1)
+        {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("更新失败");
+        }
+        return ResponseEntity.ok().body("更新成功");
+    }
 }
