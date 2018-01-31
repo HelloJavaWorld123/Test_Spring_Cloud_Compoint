@@ -56,12 +56,12 @@ public class MemberServiceImpl
     public ResponseEntity addMem(@RequestBody MemberInDTO member)
     {
         LOGGER.info("********************新增单个用户的信息*************************");
-        Member user = new Member();
+        MemberInDTO user = new MemberInDTO();
         user.setAddress(member.getAddress());
         user.setAge(member.getAge());
         user.setName(member.getName());
-        user.setSexEnum(SexEnum.getCode(member.getSex()));
-        user.setDeleteFlag(DeleteFlageEnum.DELETE_NO);
+        user.setSex(member.getSex());
+        user.setDeleteFlag(DeleteFlageEnum.DELETE_NO.getCode());
         user.setCreateTime(new Date());
         user.setUpdateTime(new Date());
         int i = memberMapper.addMember(user);

@@ -3,6 +3,9 @@ package com.test.eureka.client.test.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * ======================
  * Created By User: RXK
@@ -13,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  * ======================
  */
 @ApiModel(value = "MemberInDTO",description = "用户操作入参对象")
-public class MemberInDTO
+public class MemberInDTO implements Serializable
 {
 	@ApiModelProperty(value = "用户Id",name = "id")
 	private String id ;
@@ -29,6 +32,16 @@ public class MemberInDTO
 
 	@ApiModelProperty(value = "用户性别",name = "sex")
 	private Integer sex ;
+
+	private Integer deleteFlag ;
+
+	private Date updateTime;
+
+	private Date createTime ;
+
+	private String updateBy;
+
+	private String createBy;
 
 
 	public String getId()
@@ -79,5 +92,55 @@ public class MemberInDTO
 	public void setSex(Integer sex)
 	{
 		this.sex = sex;
+	}
+
+	public Integer getDeleteFlag()
+	{
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(Integer deleteFlag)
+	{
+		this.deleteFlag = deleteFlag;
+	}
+
+	public Date getUpdateTime()
+	{
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime)
+	{
+		this.updateTime = updateTime;
+	}
+
+	public Date getCreateTime()
+	{
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime)
+	{
+		this.createTime = createTime;
+	}
+
+	public String getUpdateBy()
+	{
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy)
+	{
+		this.updateBy = updateBy;
+	}
+
+	public String getCreateBy()
+	{
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy)
+	{
+		this.createBy = createBy;
 	}
 }

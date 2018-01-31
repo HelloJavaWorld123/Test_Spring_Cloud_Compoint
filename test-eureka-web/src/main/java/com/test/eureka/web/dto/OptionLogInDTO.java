@@ -10,6 +10,8 @@ package com.test.eureka.web.dto;
  */
 public class OptionLogInDTO
 {
+    private String _id ; //使用mongodb 自带的 ID
+
     private String startTime ;
 
     private String endTime ;
@@ -18,7 +20,7 @@ public class OptionLogInDTO
 
     private String requestURI ;
 
-    private StringBuffer requestURL ;
+    private String requestURL ;
 
     private String body ;
 
@@ -27,6 +29,16 @@ public class OptionLogInDTO
     private String userAgent ;
 
     private Integer status;
+
+    public String get_id()
+    {
+        return _id;
+    }
+
+    public void set_id(String _id)
+    {
+        this._id = _id;
+    }
 
     public String getStartTime()
     {
@@ -68,12 +80,12 @@ public class OptionLogInDTO
         this.requestURI = requestURI;
     }
 
-    public StringBuffer getRequestURL()
+    public String getRequestURL()
     {
         return requestURL;
     }
 
-    public void setRequestURL(StringBuffer requestURL)
+    public void setRequestURL(String requestURL)
     {
         this.requestURL = requestURL;
     }

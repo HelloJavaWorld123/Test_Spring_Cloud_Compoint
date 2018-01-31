@@ -1,11 +1,14 @@
 package com.test.eureka.web.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.test.eureka.web.config.RequestBodyHelper;
 import com.test.eureka.web.dto.OptionLogInDTO;
 import com.test.eureka.web.service.OptionLogService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,8 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -34,6 +35,11 @@ public class OptionLogServiceImpl implements OptionLogService
 
     private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    private static final String MONGO_COLLECTION_NAME = "option_log";
+
+    @Autowired
+    private MongoTemplate mongoTemplate ;
+
     @Override
     public void insertLog(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView, Long startTime, long endTime)
     {
@@ -44,14 +50,13 @@ public class OptionLogServiceImpl implements OptionLogService
         //从请求中获取各项参数
         String requestURI = request.getRequestURI();
 
-        StringBuffer requestURL = request.getRequestURL();
+        String requestURL = request.getRequestURL().toString();
 
         String UserAgent = request.getHeader("User-Agent");
 
         String IP = getRemoteIP(request);
 
-        String body = getRequestBody(request);
-
+        String body = RequestBodyHelper.getBody(request);
         int status = response.getStatus();
 
         OptionLogInDTO dto = new OptionLogInDTO();
@@ -66,8 +71,7 @@ public class OptionLogServiceImpl implements OptionLogService
         dto.setBody(body);
         dto.setStatus(status);
 
-
-
+        mongoTemplate.insert(dto, MONGO_COLLECTION_NAME);
     }
 
     /**

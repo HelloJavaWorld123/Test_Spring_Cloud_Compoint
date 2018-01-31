@@ -1,5 +1,7 @@
 package com.test.eureka.web.dto;
 
+import java.io.Serializable;
+
 /**
  * ======================
  * Created By User: RXK
@@ -8,7 +10,7 @@ package com.test.eureka.web.dto;
  * Description: 登录入参对象
  * ======================
  */
-public class LogInInDTO
+public class LogInInDTO implements Serializable
 {
     private String account ;
 

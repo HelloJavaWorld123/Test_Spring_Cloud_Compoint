@@ -62,8 +62,8 @@
         <selectKey resultType="java.lang.String" keyProperty="id" order="BEFORE">
             SELECT REPLACE(UUID(),'-','')
         </selectKey>
-        INSERT INTO user (id,name,age,sex,address)
-        VALUES (#{id},#{member.name},#{member.age},#{member.sex},#{member.address})
+        INSERT INTO user (id,name,age,sex,address,create_time,update_time)
+        VALUES (#{id},#{member.name},#{member.age},#{member.sex},#{member.address},#{member.createTime},#{member.updateTime})
     </insert>
 
     <delete id="deleteById" parameterType="java.lang.String">

@@ -6,10 +6,10 @@ spring:
   data:
     mongodb:
       host: 127.0.0.1
-      username: root
-      password: root
-      authentication-database: admin
-      database: local
+      username: dba
+      password: dba
+      authentication-database: test
+      database: option_log
 eureka:
   instance:
     ip-address: 127.0.0.1

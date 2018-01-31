@@ -23,7 +23,7 @@ public interface MemberMapper
 
 	List<Member> selectAll();
 
-	int addMember(@Param("member") Member member);
+	int addMember(@Param("member") MemberInDTO member);
 
 	int deleteById(String id);
 
