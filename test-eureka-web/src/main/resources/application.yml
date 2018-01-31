@@ -3,6 +3,13 @@ server:
 spring:
   application:
      name: Web-Client-Service
+  data:
+    mongodb:
+      host: 127.0.0.1
+      username: root
+      password: root
+      authentication-database: admin
+      database: local
 eureka:
   instance:
     ip-address: 127.0.0.1
@@ -29,4 +36,10 @@ feign:
     request:
       min-request-size: 1024
       mime-types: text/xml,application/json,application/xml
+management:
+  health:
+    mongo:
+      enabled: true
+
+
 

@@ -1,4 +1,4 @@
-package com.test.eureka.web.rpc.service;
+package com.test.eureka.web.service.rpc;
 
 import com.test.eureka.client.test.service.MemberClientService;
 import org.springframework.cloud.netflix.feign.FeignClient;

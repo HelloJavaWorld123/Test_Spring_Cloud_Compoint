@@ -2,11 +2,9 @@ package com.test.eureka.web.controller;
 
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
-import com.test.eureka.web.rpc.service.MemberFeignService;
+import com.test.eureka.web.service.rpc.MemberFeignService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
