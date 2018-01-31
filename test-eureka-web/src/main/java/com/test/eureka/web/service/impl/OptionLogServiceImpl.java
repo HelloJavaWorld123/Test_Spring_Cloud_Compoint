@@ -2,6 +2,7 @@ package com.test.eureka.web.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.test.eureka.web.config.RequestBodyHelper;
+import com.test.eureka.web.config.RequestWrapper;
 import com.test.eureka.web.dto.OptionLogInDTO;
 import com.test.eureka.web.service.OptionLogService;
 import org.apache.commons.io.IOUtils;
@@ -43,6 +44,8 @@ public class OptionLogServiceImpl implements OptionLogService
     @Override
     public void insertLog(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView, Long startTime, long endTime)
     {
+
+
         long consumTime = endTime - startTime; //消耗时长
         String requestStartTime = FORMAT.format(new Date(startTime));
         String requestEndTime = FORMAT.format(new Date(endTime));
@@ -56,7 +59,8 @@ public class OptionLogServiceImpl implements OptionLogService
 
         String IP = getRemoteIP(request);
 
-        String body = RequestBodyHelper.getBody(request);
+        String body = getRequestBody(request);
+
         int status = response.getStatus();
 
         OptionLogInDTO dto = new OptionLogInDTO();
@@ -71,7 +75,8 @@ public class OptionLogServiceImpl implements OptionLogService
         dto.setBody(body);
         dto.setStatus(status);
 
-        mongoTemplate.insert(dto, MONGO_COLLECTION_NAME);
+        mongoTemplate.insert(dto,MONGO_COLLECTION_NAME);
+        logger.info("*******************插入成功***************");
     }
 
     /**
@@ -88,15 +93,8 @@ public class OptionLogServiceImpl implements OptionLogService
             Map<String, String[]> parameterMap = request.getParameterMap();
             return JSONObject.toJSONString(parameterMap);
         }
-        try
-        {
-            return IOUtils.toString(request.getInputStream());
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            logger.info("获取请求体内容出错");
-            return null;
-        }
+
+        return RequestBodyHelper.getBody(request);
     }
 
     /**

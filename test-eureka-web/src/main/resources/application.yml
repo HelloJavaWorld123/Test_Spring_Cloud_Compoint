@@ -8,8 +8,8 @@ spring:
       host: 127.0.0.1
       username: dba
       password: dba
-      authentication-database: test
-      database: option_log
+      authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证
+      database: test  #不是 Collections文件下面的 而是 指定的库 否则会自定义根据Collection_name创建数据库
 eureka:
   instance:
     ip-address: 127.0.0.1

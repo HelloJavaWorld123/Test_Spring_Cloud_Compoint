@@ -1,5 +1,10 @@
 package com.test.eureka.web.config;
 
+import org.apache.commons.io.IOUtils;
+import org.omg.PortableInterceptor.LOCATION_FORWARD;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +26,7 @@ import java.nio.charset.Charset;
 public class RequestWrapper extends HttpServletRequestWrapper
 {
 
-    private final byte[] body;
+    private byte[] body;
 
     /**
      * Constructs a request object wrapping the given request.
@@ -31,19 +36,20 @@ public class RequestWrapper extends HttpServletRequestWrapper
      */
     public RequestWrapper(HttpServletRequest request)
     {
+        //从request的流中获取到 body ；
         super(request);
         this.body = RequestBodyHelper.getBody(request).getBytes(Charset.forName("UTF-8"));
     }
 
 
     @Override
-    public BufferedReader getReader() throws IOException
+    public BufferedReader getReader()
     {
         return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 
     @Override
-    public ServletInputStream getInputStream() throws IOException
+    public ServletInputStream getInputStream()
     {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body);
         return new ServletInputStream()
@@ -74,4 +80,5 @@ public class RequestWrapper extends HttpServletRequestWrapper
         };
 
     }
+
 }

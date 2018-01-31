@@ -17,7 +17,7 @@ import java.io.IOException;
  * ======================
  */
 @Order(1)
-@WebFilter(description = "操作日志过滤器", filterName = "Option_Log", urlPatterns = "/**")
+@WebFilter(description = "操作日志过滤器", filterName = "Option_Log", urlPatterns = "/*")
 public class OptionLogFilter implements Filter
 {
     @Override
