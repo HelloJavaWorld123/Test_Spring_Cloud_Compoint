@@ -10,21 +10,6 @@ spring:
       password: dba
       authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证
       database: test  #不是 Collections文件下面的 而是 指定的库 否则会自定义根据Collection_name创建数据库
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
-    suffix: .html
-    mode: html5
-    content-type: text/html
-  freemarker:
-    cache: true
-    allow-request-override: false
-    content-type: text/html
-    charset: utf-8
-    check-template-location: true
-    expose-request-attributes: false
-    expose-session-attributes: false
-    expose-spring-macro-helpers: false
 eureka:
   instance:
     ip-address: 127.0.0.1

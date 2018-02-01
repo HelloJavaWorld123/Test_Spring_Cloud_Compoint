@@ -2,6 +2,7 @@ package com.test.eureka.web.controller;
 
 import com.test.eureka.web.dto.LogInInDTO;
 import com.test.eureka.web.service.LogInService;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,15 @@ public class LogInController
 
     private LogInService logInService;
 
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
-
-
     @RequestMapping("/api/manage/login")
     public ResponseEntity logIn(LogInInDTO inDTO)
     {
         LOGGER.info("用户登录");
         try
         {
+            UsernamePasswordToken token = new UsernamePasswordToken(inDTO.getAccount(), inDTO.getPassword());
+
+            //TODO
             return logInService.logIn(inDTO);
 
         } catch (Exception e)

@@ -1,8 +1,5 @@
 package com.test.eureka.client.test.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,22 +12,16 @@ import java.util.Date;
  * Description: 用户入参对象
  * ======================
  */
-@ApiModel(value = "MemberInDTO",description = "用户操作入参对象")
 public class MemberInDTO implements Serializable
 {
-	@ApiModelProperty(value = "用户Id",name = "id")
 	private String id ;
 
-	@ApiModelProperty(value = "用户名称",name = "name")
 	private String name ;
 
-	@ApiModelProperty(value = "用户地址",name = "address")
 	private String address ;
 
-	@ApiModelProperty(value = "用户年龄",name = "age")
 	private Integer age ;
 
-	@ApiModelProperty(value = "用户性别",name = "sex")
 	private Integer sex ;
 
 	private Integer deleteFlag ;
