@@ -63,8 +63,6 @@ public class UserController
             return ResponseEntity.badRequest()
                     .body("缺少必要的参数");
         }
-
-        int i = 0;
         try
         {
             return memberFeignService.addMem(dto);

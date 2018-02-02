@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: test-eureka-server-cluster-slave
-  profiles:
-    active: @profileActive@
 eureka:
   instance:
     #hostname: slave

@@ -18,19 +18,25 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>local</id>
             <properties>
                 <profileActive></profileActive>
                 <serverBaseUrl>http://localhost:9999</serverBaseUrl>
-                <assemblyPath>src/main/assembly/test</assemblyPath>
+                <assemblyPath>local</assemblyPath>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
                 <jdk>${java.version}</jdk>
             </activation>
         </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+                <assemblyPath>dev</assemblyPath>
+            </properties>
+        </profile>
     </profiles>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,20 +47,15 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
             <version>${eureka.server.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
     </dependencies>
-
     <build>
         <resources>
             <resource>
@@ -85,10 +86,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.springboot.test</groupId>
+                        <artifactId>test-eureka-server-cluster-slave</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>assembly-zip</id>
                         <phase>package</phase>
+                        <goals>
+                            <!--只需要运行一次-->
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
