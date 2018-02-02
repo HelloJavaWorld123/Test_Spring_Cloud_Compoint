@@ -15,17 +15,24 @@
     <!--配置不同环境下 通过-->
     <profiles>
         <profile>
-            <id>test</id>
+            <id>local</id>
             <properties>
                 <profileActive></profileActive>
                 <!--<serviceBaseUrl>对应的测试服的域名</serviceBaseUrl>-->
                 <!--<userUnique>9oe0ifsxwh</userUnique>-->
-                <assemblyPath>test</assemblyPath><!--对应下面的assembly插件对应的值-->
+                <assemblyPath>local</assemblyPath><!--对应下面的assembly插件对应的值-->
             </properties>
             <!--默认激活当前的 配置-->
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileActive>dev</profileActive>
+                <assemblyPath>dev</assemblyPath>
+            </properties>
         </profile>
         <!--还有以下 几种激活的方式-->
         <!--<profile>
@@ -115,6 +122,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.springboot.test</groupId>
+                        <artifactId>test-eureka-server-cluster-slave</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
                 <!--执行器-->
                 <executions>
                     <execution>
@@ -122,6 +136,10 @@
                         <id>project-compiler-zip</id>
                         <!--绑定到 Maven声明周期上的打包阶段 -->
                         <phase>package</phase>
+                        <goals>
+                            <!--只运行一次-->
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
@@ -130,6 +148,8 @@
                         <!--描述 assembly xml文件的路径-->
                         <descriptor>src/main/assembly/${assemblyPath}/assembly.xml</descriptor>
                     </descriptors>
+                    <!--当使用 maven deploy命令时  不会将 zip包发布到 私服上-->
+                    <attach>false</attach>
                 </configuration>
             </plugin>
      </plugins>

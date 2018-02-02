@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,12 +32,12 @@ public class LogInController
     private LogInService logInService;
 
     @RequestMapping("/api/manage/login")
-    public ResponseEntity logIn(LogInInDTO inDTO)
+    public ResponseEntity logIn(@RequestBody LogInInDTO inDTO)
     {
         LOGGER.info("用户登录");
         try
         {
-            UsernamePasswordToken token = new UsernamePasswordToken(inDTO.getAccount(), inDTO.getPassword());
+            UsernamePasswordToken token = new UsernamePasswordToken(inDTO.getUsername(), inDTO.getPassword());
 
             //TODO
             return logInService.logIn(inDTO);

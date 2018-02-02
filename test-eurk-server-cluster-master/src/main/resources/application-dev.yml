@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: test-eurek-server-cluster-master
-  profiles:
-    active: @profileActive@
 
 eureka:
   instance:
