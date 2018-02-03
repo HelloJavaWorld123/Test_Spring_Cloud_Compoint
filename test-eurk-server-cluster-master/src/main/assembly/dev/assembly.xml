@@ -8,16 +8,37 @@
         <format>zip</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
+    <!--该标签用于设置打包的目录，点对点打包，将指定的目录打包打包到指定的目录下面-->
     <fileSets>
         <fileSet>
             <directory>libs</directory>
+            <!--输出的压缩包 在根目录下 生成 libs目录 -->
             <outputDirectory>/libs</outputDirectory>
         </fileSet>
     </fileSets>
+    <files>
+        <file>
+            <source>bin/startup.sh</source>
+            <lineEnding>unix</lineEnding>
+            <!--linux权限-->
+            <fileMode>0755</fileMode>
+            <outputDirectory>/bin</outputDirectory>
+        </file>
+        <file>
+            <source>bin/shutdown.sh</source>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <!--生成压缩包以后 会在根目录下生成 bin文件夹 与libs文件统计目录-->
+            <outputDirectory>/bin</outputDirectory>
+        </file>
+    </files>
     <dependencySets>
         <dependencySet>
+            <!--将scope为runtime的依赖打包 并输出到指定的文件夹下-->
             <scope>runtime</scope>
+            <!--将运行时的依赖 输出到 libs目录里面-->
             <outputDirectory>libs</outputDirectory>
+            <!--是否将本项目打包到输出文件夹下，比如：配置的输出文件夹为 libs，那么打完包在libs文件下会有一个本项目的jar依赖-->
             <useProjectArtifact>true</useProjectArtifact>
         </dependencySet>
     </dependencySets>
