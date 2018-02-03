@@ -34,11 +34,11 @@
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
                 <!--日志文件 输出的文件名的格式 以及归档的分隔方式-->
                 <!--<FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH HH:mm:ss}.%i.log</FileNamePattern>--> <!--有敏感符号 创建不成功-->
-                <FileNamePattern>D:\Log\Test_Cluster_Master_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+                <FileNamePattern>\usr\project\logs\server-cluster\Test_Cluster_Master_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
                 <!--保留日志文件的天数-->
                 <MaxHistory>1</MaxHistory>
-                <maxFileSize>2MB</maxFileSize>
-                <totalSizeCap>10MB</totalSizeCap>
+                <maxFileSize>10MB</maxFileSize>
+                <totalSizeCap>20MB</totalSizeCap>
             </rollingPolicy>
 
             <encoder><!--class属性 可以省去-->

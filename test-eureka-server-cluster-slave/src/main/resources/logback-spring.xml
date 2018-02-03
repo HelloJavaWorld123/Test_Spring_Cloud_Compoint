@@ -28,7 +28,7 @@
         <!--按照大小以及日期的形式分隔日志文件-->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--<FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH:mm:ss}.%i.log</FileNamePattern>-->
-            <FileNamePattern>D:\Log\Test_Cluster_Slave_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <FileNamePattern>\usr\project\logs\server-slave\Test_Cluster_Slave_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
             <MaxHistory>1</MaxHistory>
             <maxFileSize>2MB</maxFileSize>
             <totalSizeCap>10MB</totalSizeCap>
