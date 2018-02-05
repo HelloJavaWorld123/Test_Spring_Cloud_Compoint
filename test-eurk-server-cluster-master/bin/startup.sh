@@ -1,1 +1,1 @@
-nohup java -jar /usr/project/server-cluster/deployment/libs/test-eurk-server-cluster-master-1.0-SNAPSHOT.jar &
+nohup java -jar /usr/project/server-cluster/deployment/libs/test-eurk-server-cluster-master-1.0-SNAPSHOT.jar >/dev/null 2<&1 &

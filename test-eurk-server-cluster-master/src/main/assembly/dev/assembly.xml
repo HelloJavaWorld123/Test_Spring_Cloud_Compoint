@@ -4,41 +4,42 @@
           xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0
           http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     <id>assembly application</id>
+    <!--List<String> 的形式，可以包含有多种压缩方式，包含有zip tar tar.zg tar.xz war dir 等形式的工程-->
     <formats>
         <format>zip</format>
     </formats>
+    <!--与BaseDirectory标签同时使用，BaseDirectory用于定义自定义的文件夹的名称，结合true使用，会使用文件夹的名称，如果没有定义BaseDirectory而includeBaseDirectory为true，则默认使用${project.build.finalName}为基础文件夹的名称-->
     <includeBaseDirectory>false</includeBaseDirectory>
+    <!--<baseDirectory></baseDirectory>-->
+    <!--在Maven声明周期中包含有site生成站点的周期，如果该标签设置成true则先运行site在target中先生成site，在使用assembly打包时将生成的site包含在最后的包中，如果没有生成site站点而设置成true，则会报错；默认值为false；-->
+    <!--<includeSiteDirectory>true</includeSiteDirectory>-->
     <!--该标签用于设置打包的目录，点对点打包，将指定的目录打包打包到指定的目录下面-->
     <fileSets>
         <fileSet>
             <directory>libs</directory>
             <!--输出的压缩包 在根目录下 生成 libs目录 -->
             <outputDirectory>/libs</outputDirectory>
+<!--            <fileMode>0644</fileMode>
+            <directoryMode>0755</directoryMode>
+            <lineEnding>unix</lineEnding>-->
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <outputDirectory>/bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
         </fileSet>
     </fileSets>
-    <files>
-        <file>
-            <source>bin/startup.sh</source>
-            <lineEnding>unix</lineEnding>
-            <!--linux权限-->
-            <fileMode>0755</fileMode>
-            <outputDirectory>/bin</outputDirectory>
-        </file>
-        <file>
-            <source>bin/shutdown.sh</source>
-            <lineEnding>unix</lineEnding>
-            <fileMode>0755</fileMode>
-            <!--生成压缩包以后 会在根目录下生成 bin文件夹 与libs文件统计目录-->
-            <outputDirectory>/bin</outputDirectory>
-        </file>
-    </files>
     <dependencySets>
         <dependencySet>
-            <!--将scope为runtime的依赖打包 并输出到指定的文件夹下-->
+            <!--将scope为runtime的依赖打包 并输出到指定的文件夹下 默认值是 runtime-->
             <scope>runtime</scope>
             <!--将运行时的依赖 输出到 libs目录里面-->
             <outputDirectory>libs</outputDirectory>
-            <!--是否将本项目打包到输出文件夹下，比如：配置的输出文件夹为 libs，那么打完包在libs文件下会有一个本项目的jar依赖-->
+            <!--是否将本项目打包到输出文件夹下，比如：配置的输出文件夹为 libs，那么打完包在libs文件下会有一个本项目的jar依赖 defaultValue：true-->
             <useProjectArtifact>true</useProjectArtifact>
         </dependencySet>
     </dependencySets>

@@ -122,6 +122,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
+                <!--指定打包时 需要指定的依赖-->
                 <dependencies>
                     <dependency>
                         <groupId>com.springboot.test</groupId>
@@ -143,6 +144,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <!--上面的定义的ID 是否需要添加打包好的名称上；如果为true则添加到文件的名称上，否则以当前项目工程名称以及版本号为文件名称生成指定的包-->
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
                         <!--描述 assembly xml文件的路径-->
