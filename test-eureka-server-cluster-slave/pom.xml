@@ -67,8 +67,8 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
                 <!--自定义执行器-->
                 <executions>
                     <execution>
@@ -82,7 +82,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -93,6 +92,19 @@
                         <version>1.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!--指定启动类-->
+                            <mainClass>com.test.spring.cloud.eureka.slave.EurekaSlaveApplication</mainClass>
+                            <addMainClasspath>true</addMainClasspath>
+                        </manifest>
+                    </archive>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>src/main/assembly/${assemblyPath}/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
                 <executions>
                     <execution>
                         <id>assembly-zip</id>
@@ -103,13 +115,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <!--文件的描述路劲-->
-                    <descriptors>
-                        <descriptor>src/main/assembly/${assemblyPath}/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
             </plugin>
         </plugins>
     </build>

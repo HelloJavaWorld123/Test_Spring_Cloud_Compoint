@@ -1,0 +1,1 @@
+nohup java -jar /usr/project/server-slave/deployment/libs/test-eureka-server-cluster-slave-1.0-SNAPSHOT.jar >/dev/null 2>&1 &
