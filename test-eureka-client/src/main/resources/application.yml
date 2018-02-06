@@ -21,6 +21,8 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  profiles:
+    active: @profileActive@
 mybatis:
   mapper-locations: classpath*:com/test/eureka/web/client/**/dao/**/*Mapper.xml  # 不能有空格
   config-location: classpath:mybatis-config.xml
