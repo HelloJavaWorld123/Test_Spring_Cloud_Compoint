@@ -5,7 +5,6 @@ spring:
     name: test-eurek-server-cluster-master
   profiles:
     active: @profileActive@
-
 eureka:
   instance:
     #hostname: server

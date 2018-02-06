@@ -13,6 +13,15 @@
             <directory>libs</directory>
             <outputDirectory>/libs</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </fileSet>
     </fileSets>
 
     <dependencySets>
