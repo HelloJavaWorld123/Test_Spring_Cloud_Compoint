@@ -1,0 +1,47 @@
+server:
+  port: 9777
+spring:
+  application:
+    name: test-eureka-client
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/rxk?serverTimezone=UTC&characterEncoding=UTF-8
+    username: helloworld
+    password: 1234567890
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  profiles:
+    active: @profileActive@
+mybatis:
+  mapper-locations: classpath*:com/test/eureka/web/client/**/dao/**/*Mapper.xml  # 不能有空格
+  config-location: classpath:mybatis-config.xml
+eureka:
+  instance:
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+    service-url:
+        defaultZone: http://testService:123aaa@192.168.60.101:9888/eureka/,http://testService:123aaa@192.168.60.101:9999/eureka/
+endpoints:
+  enabled: true
+  actuator:
+    enabled: true
+  health:
+    enabled: true

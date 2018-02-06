@@ -1,0 +1,1 @@
+nohup java -jar /usr/project/client/deployment/libs/ >/dev/null 2>&1 &
