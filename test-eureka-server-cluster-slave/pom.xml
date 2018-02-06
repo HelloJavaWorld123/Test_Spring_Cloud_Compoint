@@ -23,12 +23,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <version>1.3.4.RELEASE</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-actuator</artifactId>
         </dependency>
@@ -38,14 +32,19 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+            <version>1.3.4.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
         <profile>
             <id>local</id>
             <properties>
-                <profileActive></profileActive>
-                <!--<serverBaseUrl>http://localhost:9999</serverBaseUrl>-->
+                <build.profile.id>local</build.profile.id>
                 <assemblyPath>local</assemblyPath>
             </properties>
             <activation>
@@ -70,15 +69,14 @@
             </resource>
         </resources>
         <plugins>
-            <!--打包jar包-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.test.spring.cloud.eureka.slave.EurekaSlaveApplication</mainClass>
                             <addClasspath>true</addClasspath>
+                            <mainClass>com.test.spring.cloud.eureka.slave.EurekaSlaveApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

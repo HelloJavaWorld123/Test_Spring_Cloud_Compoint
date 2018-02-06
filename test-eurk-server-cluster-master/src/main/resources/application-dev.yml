@@ -20,7 +20,7 @@ eureka:
     register-with-eureka: false                              # 同理 不能注册到自己上面  当启用服务注册中心时  需要改为true
     registry-fetch-interval-seconds: 30
     service-url:
-      defaultZone: http://${security.user.name}:${security.user.password}@127.0.0.1:9999/eureka/,http://${security.user.name}:${security.user.password}@127.0.0.1:9888/eureka/  # 如果使用高可用时  可以使用多个IP 同一个端口号 用逗号隔开  开启上面的 注册
+      defaultZone: http://${security.user.name}:${security.user.password}@192.168.60.101:9999/eureka/,http://${security.user.name}:${security.user.password}@192.168.60.101:9888/eureka/  # 如果使用高可用时  可以使用多个IP 同一个端口号 用逗号隔开  开启上面的 注册
 security:
   user:
     name: testService
