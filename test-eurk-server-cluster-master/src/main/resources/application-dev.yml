@@ -7,7 +7,7 @@ spring:
 eureka:
   instance:
     #hostname: server
-    ip-address: 127.0.0.1                                    # 当下面的为true时  才能使用当前的ip
+    ip-address: 192.168.60.101                                    # 当下面的为true时  才能使用当前的ip
     prefer-ip-address: true                                # 在页面上不使用默认的形式展现名称 而使用 ip：端口口的形式 显示 名称
     lease-renewal-interval-in-seconds: 10                 # 多长时间获取一次心跳
     lease-expiration-duration-in-seconds: 30              # 发呆时间 从上一次获取到心跳到下一次获取心跳的间隔时间

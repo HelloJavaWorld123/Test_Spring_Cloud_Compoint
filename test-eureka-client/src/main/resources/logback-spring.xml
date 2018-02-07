@@ -21,9 +21,9 @@
         <!--<File></File>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${FILE_PATH}-${FILE_NAME_PATTERN}</FileNamePattern>
-            <MaxHistory>30</MaxHistory>
-            <maxFileSize>2MB</maxFileSize>
-            <totalSizeCap>10MB</totalSizeCap>
+            <MaxHistory>1</MaxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>20MB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>

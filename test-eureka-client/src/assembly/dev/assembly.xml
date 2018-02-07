@@ -14,7 +14,7 @@
             <outputDirectory>/libs</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/bin</directory>
+            <directory>${project.basedir}/bin/dev</directory>
             <includes>
                 <include>*.sh</include>
             </includes>

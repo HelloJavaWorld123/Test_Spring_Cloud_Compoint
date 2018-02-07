@@ -104,13 +104,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.springboot.test</groupId>
-                        <artifactId>test-eureka-client</artifactId>
-                        <version>1.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <id>assembly-compli-zip</id>
