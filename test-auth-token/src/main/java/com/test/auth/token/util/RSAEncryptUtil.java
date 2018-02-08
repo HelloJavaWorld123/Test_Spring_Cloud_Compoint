@@ -44,8 +44,13 @@ public class RSAEncryptUtil
 
     public static void main(String[] args)
     {
+        String text = "123456789";
         //获取密匙对
-        getKeyPair();
+//        getKeyPair();
+        //通过公匙对内容加密
+        byte[] bytes = encodeByPublicKey(text.getBytes(), getPublicKeyByStr(getKeyByFile(PUBLIC_KEY_FILE)));
+        String string = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(string);
     }
 
 

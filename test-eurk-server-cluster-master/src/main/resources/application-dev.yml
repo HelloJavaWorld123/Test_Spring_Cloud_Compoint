@@ -3,7 +3,17 @@ server:
 spring:
   application:
     name: test-eurek-server-cluster-master
-
+  data:
+    mongodb:
+      username: dba
+      password: dba
+      host: 127.0.0.1
+      port: 27017
+      uri: mongodb://dba:dba@127.0.0.1:27017/test
+      authentication-database: test
+      database: test
+      repositories:
+        enabled: true
 eureka:
   instance:
     #hostname: server

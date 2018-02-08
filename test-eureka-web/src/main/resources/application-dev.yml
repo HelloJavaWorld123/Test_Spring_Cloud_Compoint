@@ -5,7 +5,7 @@ spring:
      name: Web-Client-Service
   data:
     mongodb:
-      host: 127.0.0.1
+      host: 192.168.60.76
       username: dba
       password: dba
       authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证

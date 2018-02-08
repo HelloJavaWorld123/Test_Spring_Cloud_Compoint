@@ -2,18 +2,20 @@ package com.test.eureka.web.controller;
 
 import com.test.eureka.web.dto.LogInInDTO;
 import com.test.eureka.web.service.LogInService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 /**
  * ======================
@@ -23,31 +25,23 @@ import org.springframework.web.servlet.View;
  * Description:用户登录接口
  * ======================
  */
-@Controller
-public class LogInController
-{
+@Api
+@RestController
+@RequestMapping("/api/manage")
+public class LogInController {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogInController.class);
 
+    @RequestMapping("/login")
+    public ResponseEntity logIn(@RequestBody LogInInDTO inDTO) {
+        LOGGER.info("*************************用户登录***************************");
 
-    private LogInService logInService;
 
-    @RequestMapping("/api/manage/login")
-    public ResponseEntity logIn(@RequestBody LogInInDTO inDTO)
-    {
-        LOGGER.info("用户登录");
-        try
-        {
-            UsernamePasswordToken token = new UsernamePasswordToken(inDTO.getUsername(), inDTO.getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(inDTO.getUsername(), inDTO.getPassword());
 
-            //TODO
-            return logInService.logIn(inDTO);
+        Subject subject = SecurityUtils.getSubject();
 
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("请求失败,请重新请求");
-        }
+        subject.login(token);
+
+        return null;
     }
-
-
 }
