@@ -13,6 +13,7 @@ call mvn clean install -D maven.test.skip=true -e
 
 :: 打包从client包
 @echo start compile test-eureka-client
+cd ../test-eureka-client
 call mvn clean install -D maven.test.skip=true -P dev -e
 @echo.
 
