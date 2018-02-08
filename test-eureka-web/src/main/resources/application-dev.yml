@@ -10,13 +10,11 @@ spring:
       password: dba
       authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证
       database: test  #不是 Collections文件下面的 而是 指定的库 否则会自定义根据Collection_name创建数据库
+      port:  27017
 eureka:
   instance:
-    ip-address: 192.168.60.101
-    prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10 #获取心跳的时间
     lease-expiration-duration-in-seconds: 30   #间隔时间
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
   client:
     register-with-eureka: true
     fetch-registry: true
@@ -25,8 +23,6 @@ eureka:
         defaultZone: http://testService:123aaa@192.168.60.101:9999/eureka/,http://testService:123aaa@192.168.60.101:9888/eureka/
 endpoints:
   enabled: true
-  refresh:
-    enabled: true
   health:
     enabled: true
   actuator:

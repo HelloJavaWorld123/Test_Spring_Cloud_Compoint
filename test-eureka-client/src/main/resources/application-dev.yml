@@ -26,11 +26,8 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 eureka:
   instance:
-    ip-address: 192.168.60.101
-    prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 30
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
   client:
     register-with-eureka: true
     fetch-registry: true

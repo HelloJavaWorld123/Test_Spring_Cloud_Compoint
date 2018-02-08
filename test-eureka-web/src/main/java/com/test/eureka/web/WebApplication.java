@@ -3,6 +3,7 @@ package com.test.eureka.web;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -22,18 +23,11 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.test.eureka.web"})
 @ServletComponentScan
 public class WebApplication
 {
 	public static void main(String[] args)
 	{
 		new SpringApplicationBuilder(WebApplication.class).web(true).run(args);
-
-
-
-
-
-
 	}
 }

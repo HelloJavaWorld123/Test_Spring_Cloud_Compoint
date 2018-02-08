@@ -3,6 +3,8 @@ server:
 spring:
   application:
      name: Web-Client-Service
+  profiles:
+    active: '@profileActive@'
   data:
     mongodb:
       host: 127.0.0.1
@@ -10,25 +12,19 @@ spring:
       password: dba
       authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证
       database: test   #不是 Collections文件下面的 而是 指定的库 否则会自定义根据Collection_name创建数据库
-  profiles:
-    active: @profileActive@
+      port: 27017
 eureka:
   instance:
-    ip-address: 127.0.0.1
-    prefer-ip-address: true
     lease-renewal-interval-in-seconds: 10 #获取心跳的时间
     lease-expiration-duration-in-seconds: 30   #间隔时间
-    instance-id: ${spring.application.name}:${eureka.instance.ip-address}:${server.port}
   client:
     register-with-eureka: true
     fetch-registry: true
     registry-fetch-interval-seconds: 30    #获取注册中心的服务注册信息 默认为30秒
     service-url:
-        defaultZone: http://testService:123aaa@127.0.0.1:9999/eureka/,http://testService:123aaa@127.0.0.1:9888/eureka/
+        defaultZone: http://testService:123aaa@127.0.0.1:9999/eureka/ ,http://testService:123aaa@127.0.0.1:9888/eureka/
 endpoints:
   enabled: true
-  refresh:
-    enabled: true
   health:
     enabled: true
   actuator:
