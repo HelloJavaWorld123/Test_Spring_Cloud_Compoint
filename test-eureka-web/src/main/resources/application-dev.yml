@@ -11,6 +11,7 @@ spring:
       authentication-database: test #当前用户认证的数据库 在那个数据库创建的用户 在那个数据库认证
       database: test  #不是 Collections文件下面的 而是 指定的库 否则会自定义根据Collection_name创建数据库
       port:  27017
+      uri: mongodb://dba:dba@127.0.0.1:27017/test
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 10 #获取心跳的时间

@@ -9,7 +9,6 @@
     <property name="CONSOLE_APPENDER_NAME" value="CONSOLE"/>
     <property name="LIFE_APPENDER_NAME" value="FILE"/>
     <property name="FILE_APPENDER_NAME" value="FILE"/>
-    <property name="LOG_FILE_PATH" value="D:/Log/Test_Cluster_Slave_Log.log"/>
     <property name="ROOT_LEVEL" value="debug"/>
 
     <!--控制台日志输出配置-->
@@ -28,7 +27,7 @@
         <!--按照大小以及日期的形式分隔日志文件-->
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--<FileNamePattern>${LOG_FILE_PATH}.%d{yyyy-MM-dd HH:mm:ss}.%i.log</FileNamePattern>-->
-            <FileNamePattern>/usr/project/logs/server-slave/Test_Cluster_Slave_Log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <FileNamePattern>/usr/project/logs/server-slave/test_cluster_slave_log-%d{yyyy-MM-dd}-%i.log</FileNamePattern>
             <MaxHistory>1</MaxHistory>
             <maxFileSize>10MB</maxFileSize>
             <totalSizeCap>20MB</totalSizeCap>
