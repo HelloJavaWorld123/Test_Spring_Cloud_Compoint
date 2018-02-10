@@ -108,17 +108,18 @@
         </dependency>
 
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.springboot.test</groupId>
             <artifactId>test-auth-token</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
     <profiles>
         <profile>
             <id>local</id>
             <properties>
+                <profileActive></profileActive>
                 <assemblyPath>local</assemblyPath>
             </properties>
             <activation>
@@ -137,8 +138,10 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.*</include>
+                    <include>**/application-${profileActive}.yml</include>
                 </includes>
             </resource>
             <resource>
@@ -148,7 +151,6 @@
                 </includes>
             </resource>
         </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -179,7 +181,6 @@
                     <descriptors>
                         <descriptor>src/main/assembly/${assemblyPath}/assembly.xml</descriptor>
                     </descriptors>
-                    <attach>false</attach>
                 </configuration>
             </plugin>
         </plugins>

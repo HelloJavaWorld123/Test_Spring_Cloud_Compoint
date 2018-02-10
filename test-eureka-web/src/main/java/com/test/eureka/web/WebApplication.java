@@ -24,6 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @ServletComponentScan
+@ComponentScan(basePackages = {"com.test.eureka.web"})
 public class WebApplication
 {
 	public static void main(String[] args)

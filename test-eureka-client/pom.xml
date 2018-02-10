@@ -46,7 +46,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
         </dependency>
-
         <!--数据库连接池-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -64,6 +63,7 @@
         <profile>
             <id>local</id>
             <properties>
+                <profileActive></profileActive>
                 <assemblyPath>local</assemblyPath>
             </properties>
             <activation>
@@ -91,7 +91,7 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>**/*.*</include>
+                    <include>**/*.xml</include>
                     <include>**/application-${profileActive}.yml</include>
                 </includes>
             </resource>
