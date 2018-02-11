@@ -25,10 +25,25 @@
             <version>1.3.4.RELEASE</version>
         </dependency>
 
+        <!--已支持 hystrix 熔断-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-feign</artifactId>
             <version>1.3.0.RELEASE</version>
+        </dependency>
+
+        <!--使用 Apache的 httpclient 代替 Feign 使用 jdk 自带的 URLConnection 作为 http的默认链接-->
+        <!--引入 Apache 的 httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <!--引入 Feign的 httpclient -->
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>8.18.0</version>
         </dependency>
 
         <dependency>
