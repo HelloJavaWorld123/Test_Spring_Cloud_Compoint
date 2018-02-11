@@ -6,8 +6,11 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -25,6 +28,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @ServletComponentScan
 @ComponentScan(basePackages = {"com.test.eureka.web"})
+@EnableHystrix  //开启熔断  包含有 @EnableCircuitBreaker
+@EnableHystrixDashboard // 开启熔断器的仪表盘
 public class WebApplication
 {
 	public static void main(String[] args)
