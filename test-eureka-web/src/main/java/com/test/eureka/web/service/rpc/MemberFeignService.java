@@ -12,6 +12,8 @@ import org.springframework.cloud.netflix.feign.FeignClient;
  * Time: 17:01
  * Version: V1.0
  * Description: 调用远程的接口
+ * fallback 用于在调用服务失败时，feign会开启熔断，调用指定的fallback
+ * 防止雪崩效应
  * ======***********=========
  */
 @FeignClient(value = "test-eureka-client",configuration = CustomFeignConfig.class,fallback = MemberFeignServiceHystrix.class)

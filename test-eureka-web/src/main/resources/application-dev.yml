@@ -30,10 +30,15 @@ endpoints:
   actuator:
     enabled: true
 feign:
+  hystrix:
+    enable: true  # 开启
   compression:
     request:
+      enable: true #开启
       min-request-size: 1024
       mime-types: text/xml,application/json,application/xml
+    response:
+      enable: true #开启
 management:
   health:
     mongo:

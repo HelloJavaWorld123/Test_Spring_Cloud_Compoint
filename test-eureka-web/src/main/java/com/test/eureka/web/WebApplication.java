@@ -22,8 +22,8 @@ import org.springframework.context.annotation.ComponentScan;
  * Description:
  * ======================
  */
-@EnableFeignClients
-@EnableDiscoveryClient
+@EnableFeignClients // 开启feign
+@EnableDiscoveryClient // 开启客户端发现
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @ServletComponentScan

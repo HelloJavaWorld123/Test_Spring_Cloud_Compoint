@@ -1,5 +1,6 @@
 package com.test.eureka.client.test.service;
 
+import com.test.eureka.client.test.dto.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,16 +24,16 @@ public interface ResourceClientService
     public ResponseEntity getList();
 
     @RequestMapping("/id")
-    public ResponseEntity getInfo();
+    public ResponseEntity getInfo(String id);
 
     @RequestMapping("/add")
-    public ResponseEntity add();
+    public ResponseEntity add(Resource resource);
 
     @RequestMapping("/del")
-    public ResponseEntity delete();
+    public ResponseEntity delete(String id);
 
     @RequestMapping("/update")
-    public ResponseEntity update();
+    public ResponseEntity update(Resource resource);
 
 
 }
