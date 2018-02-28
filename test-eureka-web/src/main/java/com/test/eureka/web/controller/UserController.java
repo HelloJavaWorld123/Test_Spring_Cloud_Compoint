@@ -2,10 +2,12 @@ package com.test.eureka.web.controller;
 
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
+import com.test.eureka.web.event.UserAddEvent;
 import com.test.eureka.web.service.rpc.MemberFeignService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -32,6 +34,9 @@ import java.util.Objects;
 @RequestMapping("/api/menage/user")
 public class UserController
 {
+    @Autowired
+    private ApplicationContext applicationContext ;
+
     @Autowired
     private MemberFeignService memberFeignService;
 
@@ -65,6 +70,9 @@ public class UserController
         }
         try
         {
+            //使用容器 发布事件
+            applicationContext.publishEvent(new UserAddEvent(this,dto));
+
             return memberFeignService.addMem(dto);
         } catch (Exception e)
         {

@@ -12,4 +12,8 @@
     <artifactId>test-kafka</artifactId>
     <name>kafka</name>
 
+    <dependencies>
+
+    </dependencies>
+
 </project>

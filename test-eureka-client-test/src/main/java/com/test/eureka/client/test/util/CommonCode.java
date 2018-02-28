@@ -14,10 +14,10 @@ public class CommonCode
 	public static final int PARAMTER_CODE = 10000;
 	public static final int SUCCESS = 10001;
 	public static final int NOT_ALLOW = 10002;
-//	public static final int  = 10000;
-//	public static final int PARAMTER_CODE = 10000;
-//	public static final int PARAMTER_CODE = 10000;
-//	public static final int PARAMTER_CODE = 10000;
+//	public templates final int  = 10000;
+//	public templates final int PARAMTER_CODE = 10000;
+//	public templates final int PARAMTER_CODE = 10000;
+//	public templates final int PARAMTER_CODE = 10000;
 
 
 

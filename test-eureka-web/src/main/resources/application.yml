@@ -43,3 +43,6 @@ management:
   health:
     mongo:
       enabled: true
+File:
+  upload:
+    maxSize: 10MB
