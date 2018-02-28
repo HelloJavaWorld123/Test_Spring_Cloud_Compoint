@@ -39,7 +39,7 @@ public class UserListenerSequence implements SmartApplicationListener{
      */
     @Override
     public boolean supportsSourceType(Class<?> sourceType) {
-        //只有在指定的 类来源内 发布的 指定的 时间源 才 有效
+        //只有在指定的 类来源 内 发布的 指定的 时间源 才 有效
         return sourceType == UserController.class;
     }
 

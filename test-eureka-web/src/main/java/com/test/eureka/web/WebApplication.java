@@ -12,6 +12,7 @@ import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * ======================
@@ -30,6 +31,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.test.eureka.web"})
 @EnableHystrix  //开启熔断  包含有 @EnableCircuitBreaker
 @EnableHystrixDashboard // 开启熔断器的仪表盘
+@EnableAsync
 public class WebApplication
 {
 	public static void main(String[] args)
