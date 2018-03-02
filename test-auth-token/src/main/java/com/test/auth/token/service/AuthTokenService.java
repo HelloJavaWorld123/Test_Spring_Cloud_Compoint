@@ -1,7 +1,5 @@
 package com.test.auth.token.service;
 
-import org.springframework.stereotype.Service;
-
 /**
  * ======***********=========
  * Created By User: RXK

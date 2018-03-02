@@ -12,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * Description:
  * ======================
  */
+//TODO 增加客户端的启动注解以及熔断注解
 @MapperScan(basePackages = {"com.test.auth.token.dao"})
 @SpringBootApplication
 public class AuthApplication

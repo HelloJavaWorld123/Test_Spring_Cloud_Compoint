@@ -35,4 +35,7 @@ public interface MemberClientService
 
 	@RequestMapping(value = BASE_URL+"/update",method = RequestMethod.POST)
 	ResponseEntity updateMem(@RequestBody MemberInDTO member);
+
+	@RequestMapping(value = BASE_URL+"/message",method = RequestMethod.POST)
+	Member getInfoByUserName(String username);
 }

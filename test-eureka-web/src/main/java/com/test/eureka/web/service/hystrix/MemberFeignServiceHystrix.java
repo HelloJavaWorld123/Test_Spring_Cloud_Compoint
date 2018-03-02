@@ -42,4 +42,9 @@ public class MemberFeignServiceHystrix implements MemberFeignService {
     public ResponseEntity updateMem(MemberInDTO member) {
         return null;
     }
+
+    @Override
+    public Member getInfoByUserName(String username) {
+        return null;
+    }
 }

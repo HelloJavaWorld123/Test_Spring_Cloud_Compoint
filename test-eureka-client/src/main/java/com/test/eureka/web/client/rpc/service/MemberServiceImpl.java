@@ -1,18 +1,15 @@
 package com.test.eureka.web.client.rpc.service;
 
+import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
 import com.test.eureka.client.test.enums.DeleteFlageEnum;
-import com.test.eureka.client.test.enums.SexEnum;
-import com.test.eureka.web.client.dao.MemberMapper;
-import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.service.MemberClientService;
+import com.test.eureka.web.client.dao.MemberMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -97,4 +94,11 @@ public class MemberServiceImpl
         }
         return ResponseEntity.ok().body("更新成功");
     }
+
+    @Override
+    public Member getInfoByUserName(String username) {
+        return null;
+    }
+
+
 }

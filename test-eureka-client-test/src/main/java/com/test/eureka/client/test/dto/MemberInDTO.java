@@ -18,6 +18,8 @@ public class MemberInDTO implements Serializable
 
 	private String name ;
 
+	private String password ;
+
 	private String address ;
 
 	private Integer age ;
@@ -53,6 +55,14 @@ public class MemberInDTO implements Serializable
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getAddress()

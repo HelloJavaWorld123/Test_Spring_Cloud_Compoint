@@ -1,5 +1,6 @@
 package com.test.eureka.web.controller;
 
+import com.ruijc.util.encrypt.MD5Utils;
 import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.client.test.dto.MemberInDTO;
 import com.test.eureka.web.event.UserAddEvent;
@@ -72,6 +73,9 @@ public class UserController
         {
             //使用容器 发布事件
             applicationContext.publishEvent(new UserAddEvent(this,dto));
+
+            //对密码进行 加密
+
 
             return memberFeignService.addMem(dto);
         } catch (Exception e)

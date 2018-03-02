@@ -21,16 +21,21 @@ public class Member implements Serializable
 
 	private String name ;
 
+	private String password ;
+
 	private SexEnum sexEnum ;
 
 	private Integer age ;
 
 	private String address ;
 
+	private Integer status ;
+
 	private Date updateTime ;
 	private Date createTime ;
 	private String createBy;
 	private String updateBy;
+
 	private DeleteFlageEnum deleteFlag ;
 
 
@@ -133,4 +138,21 @@ public class Member implements Serializable
 	{
 		this.deleteFlag = deleteFlag;
 	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

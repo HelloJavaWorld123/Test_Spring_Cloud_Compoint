@@ -3,3 +3,25 @@ server:
 spring:
   application:
     name: test-auth-token
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    registry-fetch-interval-seconds: 30
+    service-url:
+      defaultZone: http://testService:123aaa@127.0.0.1:9888/eureka/,http://testService:123aaa@127.0.0.1:9999/eureka/
+endpoints:
+  enabled: true
+feign:
+  hystrix:
+    enable: true
+  compression:
+    request:
+      enable: true
+      mime-types: application/json,text/html,application/xml
+      min-request-size: 2048
+    response:
+      enable: true
