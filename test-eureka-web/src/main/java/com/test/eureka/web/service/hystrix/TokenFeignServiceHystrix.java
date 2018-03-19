@@ -15,6 +15,6 @@ import org.springframework.stereotype.Component;
 public class TokenFeignServiceHystrix implements TokenFeignService{
     @Override
     public String decodePassword(String password) {
-        return null;
+        return "服务器异常";
     }
 }

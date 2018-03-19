@@ -44,3 +44,11 @@ endpoints:
     enabled: true
   health:
     enabled: true
+feign:
+  compression:
+    request:
+      enabled: true
+      mime-types: application/json
+      min-request-size: 2048
+    response:
+      enabled: true

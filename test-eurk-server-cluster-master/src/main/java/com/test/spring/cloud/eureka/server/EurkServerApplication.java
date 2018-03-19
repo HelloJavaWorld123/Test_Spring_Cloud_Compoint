@@ -2,6 +2,7 @@ package com.test.spring.cloud.eureka.server;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
@@ -15,12 +16,16 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  */
 @EnableEurekaServer
 @SpringBootApplication
-public class EurkServerApplication
+public class EurkServerApplication extends SpringBootServletInitializer
 {
+
+	/*@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(EurkServerApplication.class);
+	}*/
 
 	public static void main(String[] args)
 	{
 		new SpringApplicationBuilder(EurkServerApplication.class).web(true).run(args);
 	}
-
 }

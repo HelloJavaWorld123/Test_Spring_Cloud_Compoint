@@ -65,6 +65,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!--在外部tomcat程序部署war包时 需要将内置tomcat依赖去掉-->
+            <!--<exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>-->
+        </dependency>
+
+        <!--在外部的tomcat部署 访问时 需要次依赖-->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>9.0.4</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -117,6 +131,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--使用Maven的打包工具打包-->
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>-->
+
+            <!--使用maven打包成jar项目时 需要将spring的启动项目入口的类加入jar中-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.test.spring.cloud.eureka.server.EurkServerApplication</mainClass>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
             <!--增加 编译压缩的插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

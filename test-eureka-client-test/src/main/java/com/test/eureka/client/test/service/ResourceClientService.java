@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Description: 资源
  * ======================
  */
-@RestController
 public interface ResourceClientService
 {
 

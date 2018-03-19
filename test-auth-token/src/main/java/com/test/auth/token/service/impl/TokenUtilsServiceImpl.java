@@ -1,11 +1,10 @@
 package com.test.auth.token.service.impl;
 
-import com.test.auth.token.service.rpc.TokenUtilsService;
 import com.test.auth.token.util.RSAEncryptUtil;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
+import rpc.service.TokenUtilsService;
 
-import java.security.interfaces.RSAPrivateKey;
 import java.util.Base64;
 
 /**
@@ -16,7 +15,7 @@ import java.util.Base64;
  * Description:
  * ======================
  */
-@Service
+@RestController
 public class TokenUtilsServiceImpl implements TokenUtilsService {
 
     private static final String PRIVATE_KEY_FILE = "D:/RAS/private.txt";

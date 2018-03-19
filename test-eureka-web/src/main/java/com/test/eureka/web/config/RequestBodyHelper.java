@@ -26,29 +26,17 @@ public class RequestBodyHelper
     //从request请求流中获取内容 相当于做备份 是的流可以多次读取
     public static String getBody(HttpServletRequest request)
     {
-        BufferedReader br = null;
         InputStream inputStream = null;
-        StringBuilder sb = null;
         try
         {
             inputStream = request.getInputStream();
-            br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-            sb = new StringBuilder();
-            String readLine = null;
-            while ((readLine = br.readLine()) != null)
-            {
-                sb.append(readLine);
-            }
+            String string = IOUtils.toString(inputStream);
+            return string ;
         } catch (IOException e)
         {
             e.printStackTrace();
             LOGGER.info("读取参数时，出现异常:{}", e.getMessage());
-        } finally
-        {
-            IOUtils.closeQuietly(br);
-            IOUtils.closeQuietly(inputStream);
+            return null ;
         }
-        return sb.toString() ;
     }
 }

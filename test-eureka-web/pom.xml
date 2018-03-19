@@ -104,7 +104,7 @@
         <!--登录时 需要引入 验证密码的操作-->
         <dependency>
             <groupId>com.springboot.test</groupId>
-            <artifactId>test-auth-token</artifactId>
+            <artifactId>test-auth-token-client</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
