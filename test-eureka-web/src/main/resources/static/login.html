@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>登录页面</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
+
+    <script>
+    function login(){
+        var params = {
+            "userName":$('#userName').val(),
+            "password":$('#password').val()
+            };
+        $.ajax({
+          type: "POST",
+          url: "http://127.0.0.1:9666/api/manage/login",
+          data: params,
+          dataType : "jsonp",
+          success: function(result){
+            alert(result);
+          },
+          error: function(result) {
+               alert(result)
+          }
+        });
+    }
+</script>
+</head>
+<body>
+<form method="post">
+    <div>
+        用户名：<input type="text" name="userName" id="userName"/>
+        密码：<input type="password" name="password" id="password"/>
+    </div>
+    <input type="button" value="登录" onclick="login()"/>
+</form>
+</body>
+</html>

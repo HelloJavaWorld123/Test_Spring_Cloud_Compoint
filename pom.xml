@@ -17,8 +17,6 @@
         <module>test-eureka-client-test</module>
         <module>test-kafka</module>
         <module>test-eureka-web</module>
-        <module>test-auth-token</module>
-        <module>test-auth-token-client</module>
     </modules>
 
 

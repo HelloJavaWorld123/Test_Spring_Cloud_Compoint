@@ -1,6 +1,5 @@
 package com.test.eureka.web.utils;
 
-import com.test.eureka.client.test.dto.Member;
 import com.test.eureka.web.dto.LogInInDTO;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -28,10 +27,10 @@ public class EncryptUtil {
         SecureRandomNumberGenerator numberGenerator = new SecureRandomNumberGenerator();
 
         StringBuffer sb = new StringBuffer();
-        String salt = sb.append(member.getUsername()).append(numberGenerator.nextBytes().toHex()).toString();
+        String salt = sb.append(member.getUserName()).append(numberGenerator.nextBytes().toHex()).toString();
 
         //经过加密以后的密码  确保用户名的唯一性 就可以保证 即使相同的密码 加密以后的密码也是不一样的
-        return new SimpleHash(ALGORRITHM, member.getPassword(), member.getUsername()+PRIVATE_SALT, HASHCOUNT).toHex();
+        return new SimpleHash(ALGORRITHM, member.getPassword(), member.getUserName()+PRIVATE_SALT, HASHCOUNT).toHex();
     }
 
 

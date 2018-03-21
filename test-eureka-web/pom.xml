@@ -100,14 +100,6 @@
             <artifactId>shiro-ehcache</artifactId>
             <version>1.4.0</version>
         </dependency>
-
-        <!--登录时 需要引入 验证密码的操作-->
-        <dependency>
-            <groupId>com.springboot.test</groupId>
-            <artifactId>test-auth-token-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
