@@ -25,14 +25,14 @@ import org.springframework.transaction.PlatformTransactionManager;
  * Description:
  * ======================
  */
-@EnableFeignClients // 开启feign
-@EnableDiscoveryClient // 开启客户端发现
+//@EnableFeignClients // 开启feign
+//@EnableDiscoveryClient // 开启客户端发现
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @ServletComponentScan
 @ComponentScan(basePackages = {"com.test.eureka.web"})
 @EnableHystrix  //开启熔断  包含有 @EnableCircuitBreaker
-@EnableHystrixDashboard // 开启熔断器的仪表盘
+//@EnableHystrixDashboard // 开启熔断器的仪表盘
 @EnableAsync
 public class WebApplication
 {

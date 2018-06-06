@@ -58,7 +58,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
     </dependencies>
-
     <profiles>
         <profile>
             <id>local</id>
@@ -66,9 +65,6 @@
                 <profileActive></profileActive>
                 <assemblyPath>local</assemblyPath>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
         <profile>
             <id>dev</id>
@@ -76,9 +72,11 @@
                 <profileActive>dev</profileActive>
                 <assemblyPath>dev</assemblyPath>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
-
     <build>
         <resources>
             <resource>
@@ -90,9 +88,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <!--如果只写 *.xml 则会把yml 文件 也排除掉的 启动的时候 也不会加载yml文件-->
                 <includes>
-                    <include>**/*.xml</include>
-                    <include>**/application-${profileActive}.yml</include>
+                    <include>**/*.*</include>
                 </includes>
             </resource>
         </resources>
@@ -131,6 +129,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

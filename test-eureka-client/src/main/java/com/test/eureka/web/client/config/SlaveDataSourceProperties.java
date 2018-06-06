@@ -2,24 +2,25 @@ package com.test.eureka.web.client.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
+
 /**
  * ======================
  * Created By User: RXK
- * Date: 2018/2/10  13:19
+ * Date: 2018/6/6  17:04
  * Version: V1.0
  * Description:
  * ======================
  */
-@ConfigurationProperties(prefix = CoustomerDataSource.DATA_SOURCE )
-public class CoustomerDataSource {
+@ConfigurationProperties(prefix = SlaveDataSourceProperties.DataSource)
+public class SlaveDataSourceProperties {
+    public static final String DataSource ="spring.datasource.slave" ;
 
-    public static final String DATA_SOURCE = "spring.datasource";
+    private String[] url ;
 
-    private String username ;
+    private String[] username;
 
-    private String url ;
-
-    private String password ;
+    private String[] password ;
 
     private String driverClassName ;
 
@@ -39,7 +40,7 @@ public class CoustomerDataSource {
 
     private String validationQuery ;
 
-    private boolean testWhileIdle ;
+    private Boolean testWhileIdle ;
 
     private Boolean testOnBorrow ;
 
@@ -53,30 +54,28 @@ public class CoustomerDataSource {
 
     private String type;
 
-    public CoustomerDataSource() {
-    }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUrl() {
+    public String[] getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(String[] url) {
         this.url = url;
     }
 
-    public String getPassword() {
+    public String[] getUsername() {
+        return username;
+    }
+
+    public void setUsername(String[] username) {
+        this.username = username;
+    }
+
+    public String[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String[] password) {
         this.password = password;
     }
 

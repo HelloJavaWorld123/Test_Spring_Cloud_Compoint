@@ -6,11 +6,10 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
-import org.mybatis.spring.SqlSessionFactoryBean;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -18,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +31,20 @@ import java.util.List;
  * ======================
  */
 @Configuration
-@EnableConfigurationProperties({CoustomerDataSource.class})
+@EnableConfigurationProperties({DataSourceProperties.class,SlaveDataSourceProperties.class})
 public class DruidConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DruidConfig.class);
 
+    private final DataSourceProperties writeProperties;
+
+    private final SlaveDataSourceProperties readProperties;
+
     @Autowired
-    private CoustomerDataSource properties;
+    public DruidConfig(DataSourceProperties dataSourceProperties,SlaveDataSourceProperties readProperties) {
+        this.writeProperties = dataSourceProperties;
+        this.readProperties = readProperties;
+    }
 
     @Bean
     public ServletRegistrationBean druidStatViewServlet() {
@@ -61,32 +68,35 @@ public class DruidConfig {
         return bean;
     }
 
-    @Bean
+    /**
+     * 作为主库 也是 唯一一个 写库
+     */
+    @Bean(name = "dataSource")
     public DruidDataSource dataSource() {
         DruidDataSource dataSource = new DruidDataSource();
 
-        dataSource.setUrl(properties.getUrl());
-        dataSource.setUsername(properties.getUsername());
-        dataSource.setPassword(properties.getPassword());
-        dataSource.setDriverClassName(properties.getDriverClassName());
+        dataSource.setUrl(writeProperties.getUrl());
+        dataSource.setUsername(writeProperties.getUsername());
+        dataSource.setPassword(writeProperties.getPassword());
+        dataSource.setDriverClassName(writeProperties.getDriverClassName());
 
-        dataSource.setTestWhileIdle(properties.getTestWhileIdle());
-        dataSource.setTestOnReturn(properties.getTestOnReturn());
-        dataSource.setTestOnBorrow(properties.getTestOnBorrow());
-        dataSource.setMaxActive(properties.getMaxActive());
-        dataSource.setMaxWait(properties.getMaxWait());
-        dataSource.setMinIdle(properties.getMinIdle());
-        dataSource.setInitialSize(properties.getInitialSize());
-        dataSource.setValidationQuery(properties.getValidationQuery());
+        dataSource.setTestWhileIdle(writeProperties.getTestWhileIdle());
+        dataSource.setTestOnReturn(writeProperties.getTestOnReturn());
+        dataSource.setTestOnBorrow(writeProperties.getTestOnBorrow());
+        dataSource.setMaxActive(writeProperties.getMaxActive());
+        dataSource.setMaxWait(writeProperties.getMaxWait());
+        dataSource.setMinIdle(writeProperties.getMinIdle());
+        dataSource.setInitialSize(writeProperties.getInitialSize());
+        dataSource.setValidationQuery(writeProperties.getValidationQuery());
 
-        dataSource.setMaxOpenPreparedStatements(properties.getMaxOpenPreparedStatements());
-        dataSource.setTimeBetweenEvictionRunsMillis(properties.getTimeBetweenEvictionRunsMillis());
-        dataSource.setPoolPreparedStatements(properties.getPoolPreparedStatements());
-        dataSource.setTimeBetweenConnectErrorMillis(properties.getTimeBetweenEvictionRunsMillis());
-        dataSource.setConnectionProperties(properties.getConnectionProperties());
+        dataSource.setMaxOpenPreparedStatements(writeProperties.getMaxOpenPreparedStatements());
+        dataSource.setTimeBetweenEvictionRunsMillis(writeProperties.getTimeBetweenEvictionRunsMillis());
+        dataSource.setPoolPreparedStatements(writeProperties.getPoolPreparedStatements());
+        dataSource.setTimeBetweenConnectErrorMillis(writeProperties.getTimeBetweenEvictionRunsMillis());
+        dataSource.setConnectionProperties(writeProperties.getConnectionProperties());
 
         try {
-            dataSource.setFilters(properties.getFilters());
+            dataSource.setFilters(writeProperties.getFilters());
 
             List<Filter> filterList=new ArrayList<Filter>();
             filterList.add(wallFilter());
@@ -98,6 +108,50 @@ public class DruidConfig {
         }
         return dataSource;
     }
+
+    @Bean(name="readDataSource")
+    public List<DataSource> readDataSource(){
+        List<DataSource> list = new ArrayList<>();
+        //不使用的时候 在配置文件中 直接删除掉 也不会报错
+        if(readProperties != null && ArrayUtils.isNotEmpty(readProperties.getUrl())) {
+
+            DruidDataSource readDataSource = new DruidDataSource();
+            readDataSource.setDriverClassName(readProperties.getDriverClassName());
+            try {
+                readDataSource.setFilters(readProperties.getFilters());
+                List<Filter> filters = new ArrayList<>();
+                filters.add(wallFilter());
+                dataSource().setProxyFilters(filters);
+
+            } catch (SQLException e) {
+                LOGGER.info("读库设置过滤出现异常:{}", e.getMessage());
+            }
+            readDataSource.setMaxWait(readProperties.getMaxWait());
+            readDataSource.setMinIdle(readProperties.getMinIdle());
+            readDataSource.setMaxActive(readProperties.getMaxActive());
+            readDataSource.setInitialSize(readProperties.getInitialSize());
+            readDataSource.setTestOnBorrow(readProperties.getTestOnBorrow());
+            readDataSource.setTestOnReturn(readProperties.getTestOnReturn());
+            readDataSource.setTestWhileIdle(readProperties.getTestWhileIdle());
+            readDataSource.setInitialSize(readProperties.getInitialSize());
+            readDataSource.setValidationQuery(readProperties.getValidationQuery());
+            readDataSource.setConnectionProperties(readProperties.getConnectionProperties());
+            readDataSource.setPoolPreparedStatements(readProperties.getPoolPreparedStatements());
+            readDataSource.setMaxOpenPreparedStatements(readProperties.getMaxOpenPreparedStatements());
+            readDataSource.setMinEvictableIdleTimeMillis(readProperties.getMinEvictableIdleTimeMillis());
+            readDataSource.setTimeBetweenEvictionRunsMillis(readProperties.getTimeBetweenEvictionRunsMillis());
+            list.add(readDataSource);
+            for(int i =0 ; i< readProperties.getUrl().length; i++){
+                DruidDataSource dataSource = readDataSource.cloneDruidDataSource();
+                dataSource.setUrl(readProperties.getUrl()[i]);
+                dataSource.setUsername(readProperties.getUsername()[i]);
+                dataSource.setPassword(readProperties.getPassword()[i]);
+                list.add(dataSource);
+            }
+        }
+        return list;
+    }
+
 
     @Bean
     public WallConfig wallConfig(){

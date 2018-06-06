@@ -1,33 +1,57 @@
 server:
   port: 9777
 spring:
-  application:
-    name: test-eureka-client
   datasource:
-    username: test
-    password: test
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    filters: stat,wall,slf4j
-    maxActive: 20
-    initialSize: 1
-    maxWait: 60000
-    minIdle: 1
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: select 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    maxOpenPreparedStatements: 20
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.60.76:3306/rxk?serverTimezone=UTC&characterEncoding=UTF-8
-  profiles:
-    active: @profileActive@
-mybatis:
-  mapper-locations: classpath*:com/test/eureka/web/client/**/dao/**/*Mapper.xml  # 不能有空格
-  config-location: classpath:mybatis-config.xml
+    master:
+        url: jdbc:mysql://127.0.0.1:3306/rxk?serverTimezone=UTC&characterEncoding=UTF-8
+        username: helloworld
+        password: 1234567890
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        filters: stat,wall,slf4j
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        type: com.alibaba.druid.pool.DruidDataSource
+    slave:
+        -
+         url: jdbc:mysql://10.0.20.170:3306/dev_healthmall_sail?useUnicode=true&characterEncoding=utf-8
+         username: dev_healthmall_sail
+         password: PNB4SIwR2MSHfXcGOB98fu370
+        -
+         url: jdbc:mysql://127.0.0.1:3306/rxk?serverTimezone=UTC&characterEncoding=UTF-8
+         username: helloworld
+         password: 1234567890
+        -
+         url: jdbc:mysql://10.0.20.170:3306/healthmall_iot?useUnicode=true&characterEncoding=utf-8
+         username: healthmall_iot
+         password: TkFMKeO5xbXgbgKBWv7YOf9H8
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         filters: stat,wall,slf4j
+         maxActive: 20
+         initialSize: 1
+         maxWait: 60000
+         minIdle: 1
+         timeBetweenEvictionRunsMillis: 60000
+         minEvictableIdleTimeMillis: 300000
+         validationQuery: select 'x'
+         testWhileIdle: true
+         testOnBorrow: false
+         testOnReturn: false
+         poolPreparedStatements: true
+         maxOpenPreparedStatements: 20
+         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+         type: com.alibaba.druid.pool.DruidDataSource
+
 eureka:
   instance:
     lease-renewal-interval-in-seconds: 10

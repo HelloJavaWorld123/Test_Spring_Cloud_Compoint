@@ -1,3 +1,6 @@
+import org.omg.DynamicAny._DynAnyFactoryStub;
+
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,7 +16,7 @@ public class TimeUtils {
 
     public static void main(String[] args){
 
-        String weekOfYear = getWeekOfYear(new Date());
+       /* String weekOfYear = getWeekOfYear(new Date());
         System.out.println("当前日期属于第"+weekOfYear+"周");
 
         String monthOfYear = getMonthOfYear(new Date());
@@ -36,7 +39,10 @@ public class TimeUtils {
 
         String lastMonthEnd = getLastMonthEnd(new Date());
         System.out.println("上一个月的结束时间："+lastMonthEnd);
+*/
 
+//       System.out.println(Calendar.getInstance().getTime());
+       System.out.println(BigDecimal.valueOf(10600.22).divide(BigDecimal.valueOf(100),BigDecimal.ROUND_HALF_UP).intValue());
 
 
     }

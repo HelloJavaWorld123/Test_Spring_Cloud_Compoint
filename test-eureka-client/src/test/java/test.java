@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
  * Description:
  * ======================
  */
-@PropertySource(value ="classpath:application.yml" )
+@PropertySource(value = "classpath:application.yml")
 public class test {
 
     @Value(value = "${spring.datasource.url}")

@@ -25,20 +25,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Description:
  * ======================
  */
-@MapperScan(annotationClass = Repository.class,basePackages = {"com.test.eureka.web.client.dao"})
-@ComponentScan(basePackages = {"com.test.eureka.web.client"})
 @SpringBootApplication
+@MapperScan(annotationClass = Repository.class, basePackages = {"com.test.eureka.web.client.dao"})
+@ComponentScan(basePackages = {"com.test.eureka.web.client"})
 @EnableTransactionManagement
-@EnableFeignClients
-@EnableDiscoveryClient
+//@EnableFeignClients
+//@EnableDiscoveryClient
 @ServletComponentScan
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @Import(DruidConfig.class)
-public class EurekaClientApplication
-{
-	public static void main(String[]args){
-		new SpringApplicationBuilder(EurekaClientApplication.class).web(true)
-				.run(args);
-	}
+public class EurekaClientApplication {
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(EurekaClientApplication.class).web(true).run(args);
+    }
 
 }
