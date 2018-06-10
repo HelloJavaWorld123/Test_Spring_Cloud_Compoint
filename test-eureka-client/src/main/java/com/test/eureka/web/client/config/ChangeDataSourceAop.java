@@ -35,7 +35,7 @@ public class ChangeDataSourceAop {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChangeDataSourceAop.class);
 
-    @Pointcut("execution(com.test.eureka.web.client.rpc.service.**.*(..)) && @annotation(com.test.eureka.web.client.config.ReadDataSource)")
+    @Pointcut("execution(* com.test.eureka.web.client.rpc.service.*.*(..)) && @annotation(com.test.eureka.web.client.config.ReadDataSource)")
     public void pointCut() {
     }
 
