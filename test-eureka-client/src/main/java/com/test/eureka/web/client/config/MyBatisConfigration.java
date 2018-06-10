@@ -1,6 +1,6 @@
 package com.test.eureka.web.client.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,20 +11,19 @@ import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.devtools.autoconfigure.DevToolsDataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ======================
@@ -39,14 +38,14 @@ public class MyBatisConfigration extends MybatisAutoConfiguration {
 
 
     @Autowired
-    private MybatisProperties properties ;
+    private MybatisProperties properties;
 
     @Autowired
-    private ResourceLoader resourceLoader ;
+    private ResourceLoader resourceLoader;
 
 
     @Resource(name = "dataSource")
-    private DataSource writeDataSource ;
+    private DataSource writeDataSource;
 
     @Resource(name = "readDataSource")
     private List<DataSource> readDataSource;
@@ -58,6 +57,7 @@ public class MyBatisConfigration extends MybatisAutoConfiguration {
 
     /**
      * 自定义 SqlSessionFactory 中使用的数据源
+     *
      * @return ：sqlSessionFactory 对象
      */
     @Bean
@@ -93,15 +93,24 @@ public class MyBatisConfigration extends MybatisAutoConfiguration {
 
 
     @Bean
-    public AbstractRoutingDataSource routingDataSource(){
+    public AbstractRoutingDataSource routingDataSource() {
+        int size = 0;
 
-        int  size = 0 ;
+        if (CollectionUtils.isNotEmpty(readDataSource)) {
+            size = readDataSource.size();
+        }
 
+        MyAbstractroutintDataSource dataSourceProxy = new MyAbstractroutintDataSource(size);
 
-        return null;
+        Map<Object, Object> targetDataSource = new HashMap<>();
 
+        for (int i = 0; i < readDataSource.size(); i++) {
+            targetDataSource.put(i, readDataSource.get(i));
+        }
+
+        // 默认的  写库
+        dataSourceProxy.setDefaultTargetDataSource(writeDataSource);
+        dataSourceProxy.setTargetDataSources(targetDataSource);
+        return dataSourceProxy;
     }
-
-
-
 }
