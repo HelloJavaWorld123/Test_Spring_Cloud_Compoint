@@ -32,7 +32,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableFeignClients
 //@EnableDiscoveryClient
 @ServletComponentScan
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class,DataSourceTransactionManagerAutoConfiguration.class})
 @Import(DruidConfig.class)
 public class EurekaClientApplication {
     public static void main(String[] args) {
